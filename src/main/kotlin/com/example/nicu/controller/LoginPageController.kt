@@ -16,6 +16,7 @@ private val logger = KotlinLogging.logger {}
 @RestController
 @RequestMapping("/api/auth")
 //@CrossOrigin("http://localhost:3000/login")
+//@CrossOrigin(origins = ["http://localhost:3000"])
 class LoginPageController(
     var authenticationManager: AuthenticationManager,
     var jwtUtils: JwtUtils
@@ -33,15 +34,14 @@ class LoginPageController(
         )
         SecurityContextHolder.getContext().authentication = authentication
         val jwt: String? = jwtUtils.generateJwtToken(authentication)
-        logger.info { "jwt создан"}
+        logger.info { "jwt создан" }
         val userDetails: EmployeeDetailsImpl = authentication.principal as EmployeeDetailsImpl
-        val response : ResponseEntity<*>? = ResponseEntity.ok<Any>(
+        return ResponseEntity.ok<Any>(
             JwtResponse(
                 jwt,
-                userDetails.employeeUsername,
+                userDetails.getFullName(),
             )
         )
-        return response
     }
 
 }

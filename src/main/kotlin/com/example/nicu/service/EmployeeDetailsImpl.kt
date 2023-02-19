@@ -5,22 +5,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-
-
 class EmployeeDetailsImpl(
-//    var id: String?,
     var employeeUsername: String?,
     @JsonIgnore
-    var  employeePassword: String?,
-
+    var employeePassword: String?,
+    var firstName: String?,
+    var lastName: String?,
+    var secondName: String?,
     ) : UserDetails {
 
     companion object {
         fun build(employeeEntity: EmployeeEntity): EmployeeDetailsImpl {
             return EmployeeDetailsImpl(
-//                employeeEntity.id,
                 employeeEntity.username,
                 employeeEntity.password,
+                employeeEntity.firstName,
+                employeeEntity.lastName,
+                employeeEntity.secondName,
             )
         }
     }
@@ -51,5 +52,9 @@ class EmployeeDetailsImpl(
 
     override fun isEnabled(): Boolean {
         return true
+    }
+
+    fun getFullName() : String {
+        return "${firstName?.get(0)}. ${secondName?.get(0)}. $lastName"
     }
 }
