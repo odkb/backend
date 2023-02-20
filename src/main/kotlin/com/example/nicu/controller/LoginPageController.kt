@@ -24,8 +24,6 @@ class LoginPageController(
 
     @PostMapping("/login")
     fun authUser(@RequestBody loginRequest: LoginRequest): ResponseEntity<*>? {
-        logger.info(loginRequest.username)
-        logger.info(loginRequest.password)
         val authentication: Authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
                 loginRequest.username,

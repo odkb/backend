@@ -18,12 +18,13 @@ private val logger = KotlinLogging.logger {}
 class PBKDF2PasswordEncoder : PasswordEncoder {
     val DEFAULT_ITERATIONS = 390000
     val algorithm = "pbkdf2_sha256"
-
-    @Value("\${app.jwtSecret}")
-    private val secretCode = ""
+//
+//    @Value("\${app.jwtSecret}")
+    private val secretCode = "YGiTRAC4vDkH2OokMDebEm"
 
     override fun encode(rawPassword: CharSequence?): String {
         val hash: String = getEncodedHash(rawPassword, secretCode, DEFAULT_ITERATIONS)
+        logger.info { String.format("%s$%d$%s$%s", algorithm, DEFAULT_ITERATIONS, secretCode, hash) }
         return String.format("%s$%d$%s$%s", algorithm, DEFAULT_ITERATIONS, secretCode, hash)
     }
 
@@ -34,7 +35,6 @@ class PBKDF2PasswordEncoder : PasswordEncoder {
     }
 
     override fun matches(rawPassword: CharSequence?, encodedPassword: String?): Boolean {
-
         val parts: Array<String> = encodedPassword?.split("\\$".toRegex())?.dropLastWhile { it.isEmpty() }!!.toTypedArray()
         if (parts.size != 4) {
             return false

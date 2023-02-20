@@ -7,7 +7,7 @@ import jakarta.persistence.Table
 import java.time.Instant
 
 @Entity
-@Table(name = "mainApp_childrens")
+@Table(name = "mainApp_childrens", schema = "nicu_op")
 class ChildEntity(
     @Id
     @Column(name = "id")
