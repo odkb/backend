@@ -38,6 +38,8 @@ dependencies {
     implementation("org.openjdk.nashorn:nashorn-core:15.4")
     implementation("com.auth0:java-jwt:4.1.0")
     implementation("javax.xml.bind:jaxb-api:2.3.0")
+    implementation("org.flywaydb:flyway-core")
+    runtimeOnly("org.postgresql:postgresql")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
