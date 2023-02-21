@@ -9,3 +9,17 @@ services:
       - POSTGRES_DB=nicu_op
     ports:
       - "5432:5432"
+
+  backend:
+    image: nicu:latest
+    build:
+      context: .
+    depends_on:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/nicu_op
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
