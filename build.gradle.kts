@@ -27,6 +27,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:3.0.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -39,11 +40,20 @@ dependencies {
     implementation("com.auth0:java-jwt:4.1.0")
     implementation("javax.xml.bind:jaxb-api:2.3.0")
     implementation("org.flywaydb:flyway-core")
+    implementation("org.apache.poi:poi:5.2.3")
+    implementation("org.apache.poi:poi-ooxml:5.2.3")
+    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
     runtimeOnly("org.postgresql:postgresql")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+}
+
+tasks.register("hello"){
+    doLast {
+        println("hello Gradle")
+    }
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,6 +1,6 @@
 package com.example.nicu.dto
 
-class ChildDataFromNewBornTable(
+data class ChildDataFromNewBornTableDto(
     val fullName: String?,
     val dateOfBirth: String?,
     val id: String?,

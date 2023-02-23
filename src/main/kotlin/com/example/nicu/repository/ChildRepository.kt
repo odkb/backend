@@ -7,8 +7,4 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ChildRepository : JpaRepository<ChildEntity, Long> {
     override fun findAll(): List<ChildEntity>
-
-//    fun getFullName(): String
-//    fun getDateOfBirth(): String
-//    fun getId(): String
 }

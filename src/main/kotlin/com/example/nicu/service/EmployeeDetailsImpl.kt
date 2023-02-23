@@ -55,6 +55,6 @@ class EmployeeDetailsImpl(
     }
 
     fun getFullName() : String {
-        return "${firstName?.get(0)}. ${secondName?.get(0)}. $lastName"
+        return "$lastName ${firstName?.get(0)}. ${secondName?.get(0)}."
     }
 }

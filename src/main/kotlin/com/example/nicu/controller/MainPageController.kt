@@ -1,10 +1,7 @@
 package com.example.nicu.controller
 
-import com.example.nicu.dto.ChildDataFromNewBornTable
-import com.example.nicu.entity.ChildEntity
-import com.example.nicu.entity.EmployeeEntity
+import com.example.nicu.dto.ChildDataFromNewBornTableDto
 import com.example.nicu.repository.ChildRepository
-import com.example.nicu.repository.EmployeeRepository
 import mu.KotlinLogging
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,11 +17,11 @@ class MainPageController(
 ) {
 
     @GetMapping("/getChildrensDataFromNewbornTable")
-    fun read() : List<ChildDataFromNewBornTable>{
-        val childrenData = mutableListOf<ChildDataFromNewBornTable>()
+    fun read() : List<ChildDataFromNewBornTableDto>{
+        val childrenData = mutableListOf<ChildDataFromNewBornTableDto>()
         for (child in childRepository.findAll()){
 
-            childrenData.add(ChildDataFromNewBornTable(
+            childrenData.add(ChildDataFromNewBornTableDto(
                 child.fullName,
                 child.birthDateTime,
                 child.id,
