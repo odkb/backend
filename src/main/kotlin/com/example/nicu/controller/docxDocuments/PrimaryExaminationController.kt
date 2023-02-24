@@ -11,10 +11,16 @@ private val logger = KotlinLogging.logger {}
 class PrimaryExaminationController {
 
     @PostMapping("/getData")
-    fun getData(@RequestBody body: PrimaryExaminationDto){
+    fun getData(@RequestBody body: fff){
         if(body != null){
             val json = body
             println(json)
         }
     }
+
 }
+
+data class fff(
+    val fullNameChild: String,
+    val EPIDNumber: String,
+)
