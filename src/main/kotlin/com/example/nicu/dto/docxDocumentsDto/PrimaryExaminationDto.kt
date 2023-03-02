@@ -7,6 +7,7 @@ data class PrimaryExaminationDto(
     val comeFurtherTreatmentAndExamination : String? =null,
     val born: String? =null,
     val admissionAge: String? =null,
+    val dateToOPN: String? =null,
     val comesFrom: String? =null,
     val EPIDNumber: String? =null,
     val motherDateBirth: String? =null,

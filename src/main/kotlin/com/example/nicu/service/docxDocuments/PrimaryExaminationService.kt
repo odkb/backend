@@ -2,10 +2,13 @@ package com.example.nicu.service.docxDocuments
 
 import org.apache.poi.openxml4j.opc.OPCPackage
 import org.apache.poi.xwpf.usermodel.XWPFDocument
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.FileOutputStream
 
-val arrayTemplates = arrayListOf<String>("receiptDate", "arrivalTime", "fullNameChild", "comeFurtherTreatmentAndExamination",
-    "born", "admissionAge", "comesFrom", "EPIDNumber", "motherDateBirth", "familyStatus", "maternalIllnesses",
+val arrayTemplates = arrayListOf<String>(
+    "receiptDate", "arrivalTime", "fullNameChild", "comeFurtherTreatmentAndExamination",
+    "born", "admissionAge", "dateToOPN", "comesFrom", "EPIDNumber", "motherDateBirth", "familyStatus", "maternalIllnesses",
     "motherBloodGroup", "HIVTestingMother", "HIVTestingFather", "maternalInfectiousHistory", "pregnancy",
     "childbirth", "previousPregnancies", "dataSiblings", "featuresCoursePregnancy", "steroidProphylaxis",
     "gestationalAge", "featuresCourseChildbirth", "presentation", "methodDelivery", "durationLabor",
@@ -21,12 +24,14 @@ val arrayTemplates = arrayListOf<String>("receiptDate", "arrivalTime", "fullName
     "peristalsis", "liver", "spleen", "feeding", "bowelMovement", "kidneys", "diuresis", "stimulationDiuresis",
     "structureExternalGenitalia", "externalGenitalsFeatures", "mainSyndromesAdmission", "diagnosisAdmission",
     "surveyPlan", "carePlan", "treatmentPlan", "parenteralNutrition", "nutritionCalculation", "childBloodType",
-    "textConclusion",)
+    "textConclusion",
+)
 
-class PrimaryExamination {
-    fun fillDocument(path: String){
-        val doc = XWPFDocument(OPCPackage.open("src/main/resources/templates/primary_examination_OPN.docx"))
+class PrimaryExaminationService {
+    fun fillDocument(path: String, data : JSONObject): XWPFDocument{
+        val doc = XWPFDocument(OPCPackage.open(path))
         val paragraphs =  doc.paragraphs
+        val timeout = System.currentTimeMillis()
         for (param in arrayTemplates){
             for (p in paragraphs) {
                 val runs = p.runs
@@ -34,12 +39,20 @@ class PrimaryExamination {
                     for (r in runs) {
                         var text = r.getText(0)
                         if (text != null) {
-                            text = text.replace(param, "0")
-                            r.setText(text, 0)
+                            try{
+                                text = text.replace(param, data.getString(param) )
+                                r.setText(text, 0)
+                            }
+                            catch (e: JSONException){
+                                continue
+                            }
                         }
                     }
                 }
             }
         }
+        println(System.currentTimeMillis() - timeout)
+//        doc.write(FileOutputStream("output.docx"))
+        return doc
     }
 }
