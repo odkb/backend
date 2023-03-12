@@ -22,8 +22,7 @@ class PrimaryExaminationController(
         primaryExaminationService.fillDocument(FILE_ADDRESS, examinationDto).use { doc ->
             ByteArrayOutputStream().use { out ->
                 doc.write(out)
-                val documentBytes:ByteArray = out.toByteArray()
-                println(documentBytes.forEach { print(it) })
+                val documentBytes = out.toByteArray()
                 return ResponseEntity
                     .ok()
                     .contentLength(documentBytes.size.toLong())
