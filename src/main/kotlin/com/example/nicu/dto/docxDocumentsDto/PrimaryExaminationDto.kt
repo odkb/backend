@@ -1,7 +1,11 @@
 package com.example.nicu.dto.docxDocumentsDto
 
 import com.example.nicu.DtoFieldMap
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
+@Serializable
 data class PrimaryExaminationDto(
     val receiptDate: String? = null,
     val arrivalTime: String? = null,
@@ -9,14 +13,18 @@ data class PrimaryExaminationDto(
     val comeFurtherTreatmentAndExamination: String? = null,
     val born: String? = null,
     val admissionAge: String? = null,
+    @SerialName("dateToOPN")
     val dateToOPN: String? = null,
     val comesFrom: String? = null,
+    @SerialName("EPIDNumber")
     val EPIDNumber: String? = null,
     val motherDateBirth: String? = null,
     val familyStatus: String? = null,
     val maternalIllnesses: String? = null,
     val motherBloodGroup: String? = null,
+    @SerialName("HIVTestingMother")
     val HIVTestingMother: String? = null,
+    @SerialName("HIVTestingFather")
     val HIVTestingFather: String? = null,
     val maternalInfectiousHistory: String? = null,
     val pregnancy: String? = null,
@@ -109,6 +117,7 @@ data class PrimaryExaminationDto(
     val childBloodType: String? = null,
     val textConclusion: String? = null,
 ) : DocsDto {
+    @Transient
     private val dtoFieldMap = DtoFieldMap(PrimaryExaminationDto::class)
     override fun getFieldValue(fieldName: String): String =
         dtoFieldMap.getFieldValue(this, fieldName)
