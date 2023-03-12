@@ -1,8 +1,11 @@
 package com.example.nicu.dto
 
-class JwtResponse(
-    var  token: String?,
-    var  fullName: String?,
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class JwtResponse(
+    val token: String,
+    val fullName: String,
 ) {
-    var  type: String = "Bearer"
+    private val type: String = "Bearer"
 }

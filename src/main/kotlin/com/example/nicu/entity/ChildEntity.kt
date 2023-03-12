@@ -1,17 +1,15 @@
 package com.example.nicu.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
-import java.time.Instant
+import jakarta.persistence.*
+import org.hibernate.Hibernate
 
 @Entity
-@Table(name = "mainApp_childrens", schema = "nicu_op")
+@Table(name = "children")
 class ChildEntity(
     @Id
-    @Column(name = "id")
-    var id: String,
+    @Column(name = "child_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: String? = null,
 
     @Column(name = "historyID")
     var historyID: String? = null,
@@ -661,5 +659,14 @@ class ChildEntity(
     @Column(name = "updated_at")
     var updated_at: String? = null,
 
-) {
+    ) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
+        other as ChildEntity
+
+        return id != null && id == other.id
+    }
+
+    override fun hashCode(): Int = javaClass.hashCode()
 }

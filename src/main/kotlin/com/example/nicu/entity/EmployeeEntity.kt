@@ -1,14 +1,14 @@
 package com.example.nicu.entity
 
 import jakarta.persistence.*
-import java.time.Instant
+import org.hibernate.Hibernate
 
 @Entity
-@Table(name = "employees", schema = "nicu_op")
+@Table(name = "employees")
 class EmployeeEntity(
-
     @Id
-    @Column(name = "id")
+    @Column(name = "employee_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: String? = null,
 
     @Column(name = "password")
@@ -39,6 +39,17 @@ class EmployeeEntity(
     var specialisation: String? = null,
 
     @Column(name = "is_admin")
-    var isadmin: String? = null,
+    var isAdmin: Boolean,
+) {
+    fun getFullName() = "$lastName ${firstName?.get(0) ?: ""}. ${secondName?.get(0) ?: ""}."
 
-)
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
+        other as EmployeeEntity
+
+        return id != null && id == other.id
+    }
+
+    override fun hashCode(): Int = javaClass.hashCode()
+}

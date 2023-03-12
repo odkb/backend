@@ -1,6 +1,6 @@
 package com.example.nicu.dto
 
-class LoginRequest {
-    var username: String? = null
-    var password: String? = null
-}
+data class LoginRequest(
+    val username: String,
+    val password: String,
+)

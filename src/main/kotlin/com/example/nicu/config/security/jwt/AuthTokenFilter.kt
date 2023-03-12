@@ -1,6 +1,6 @@
-package com.example.nicu.security.JWT
+package com.example.nicu.config.security.jwt
 
-import com.example.nicu.service.EmployeeDetailsServiceImpl
+import com.example.nicu.config.security.EmployeeDetails
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
@@ -14,14 +14,12 @@ import org.springframework.util.StringUtils
 import org.springframework.web.filter.OncePerRequestFilter
 import java.io.IOException
 
-private val logger = KotlinLogging.logger {}
+private val log = KotlinLogging.logger {}
 
 class AuthTokenFilter(
     private val jwtUtils: JwtUtils,
-    private val employeeDetailsService: EmployeeDetailsServiceImpl
+    private val employeeDetails: EmployeeDetails
 ) : OncePerRequestFilter() {
-
-
     @Throws(ServletException::class, IOException::class)
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -32,14 +30,14 @@ class AuthTokenFilter(
             val jwt = parseJwt(request)
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 val username: String = jwtUtils.getUserNameFromJwtToken(jwt)
-                val userDetails: UserDetails? = employeeDetailsService.loadUserByUsername(username)
+                val userDetails: UserDetails = employeeDetails.loadUserByUsername(username)
                 val authenticationToken =
-                    UsernamePasswordAuthenticationToken(userDetails, null, userDetails!!.authorities)
+                    UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
                 authenticationToken.details = WebAuthenticationDetailsSource().buildDetails(request)
                 SecurityContextHolder.getContext().authentication = authenticationToken
             }
         } catch (e: Exception) {
-            System.err.println(e)
+            log.error("Cannot set user authentication: ${e.message}")
         }
         filterChain.doFilter(request, response)
     }
@@ -50,5 +48,4 @@ class AuthTokenFilter(
             headerAuth.substring(7, headerAuth.length)
         } else null
     }
-
 }

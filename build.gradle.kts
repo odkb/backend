@@ -1,11 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.2"
+    id("org.springframework.boot") version "3.0.3"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
-    kotlin("plugin.jpa") version "1.7.21"
+    kotlin("plugin.jpa") version "1.7.22"
+    kotlin("plugin.serialization") version "1.7.22"
 }
 
 group = "com.example"
@@ -27,34 +28,24 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:3.0.2")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.session:spring-session-core")
-    implementation("io.github.microutils:kotlin-logging-jvm:3.0.0")
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
-    implementation("org.mariadb.jdbc:mariadb-java-client:3.0.10")
-    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
-    implementation("org.openjdk.nashorn:nashorn-core:15.4")
-    implementation("com.auth0:java-jwt:4.1.0")
-    implementation("javax.xml.bind:jaxb-api:2.3.0")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("org.flywaydb:flyway-core")
     implementation("org.apache.poi:poi:5.2.3")
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation("org.apache.logging.log4j:log4j-core:2.20.0")
-    implementation("org.json:json:20220924")
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.0.10")
     runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
-}
-
-tasks.register("hello"){
-    doLast {
-        println("hello Gradle")
-    }
 }
 
 tasks.withType<KotlinCompile> {
