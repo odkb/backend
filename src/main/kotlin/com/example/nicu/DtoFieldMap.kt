@@ -12,11 +12,14 @@ class DtoFieldMap<T : DocsDto>(dtoClass: KClass<T>) {
     private val fieldMap = HashMap<String, KProperty1<T, *>>()
 
     init {
-        dtoClass.memberProperties
-            //.filter { it.returnType.isSubtypeOf(Any::class.starProjectedType) } Удалить мб смотря какие будут поля
-            .forEach { fieldMap[it.name] = it }
+        dtoClass.memberProperties.forEach { fieldMap[it.name] = it }
     }
 
-    fun getFieldValue(dto: T, fieldName: String): String =
-        fieldMap[fieldName]?.get(dto)?.toString() ?: "Не задано"
+    fun getFieldValue(dto: T, fieldName: String): String {
+        return when (val field = fieldMap[fieldName]?.get(dto)) {
+            is List<*> -> field.joinToString(", ")
+            null -> "Не выбрано"
+            else -> field.toString()
+        }
+    }
 }

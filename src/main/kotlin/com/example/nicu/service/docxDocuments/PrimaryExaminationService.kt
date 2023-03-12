@@ -25,11 +25,12 @@ class PrimaryExaminationService {
             var replaceable = false
             for (run in runs) {
                 val text = run.text()
-                if (text.startsWith("$$")) {
+                println(text)
+                if (text.contains("$$")) {
                     replaceable = true
                     run.setText("", 0)
                 } else if (replaceable) {
-                    val updatedText = dto.getFieldValue(text)
+                    val updatedText = dto.getFieldValue(text.trim())
                     replaceable = false
                     run.setText(updatedText, 0)
                 }
