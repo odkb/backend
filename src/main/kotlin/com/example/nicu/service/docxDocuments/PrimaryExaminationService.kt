@@ -13,11 +13,12 @@ import java.io.FileOutputStream
 class PrimaryExaminationService {
     fun fillDocument(path: String, dto: DocsDto): XWPFDocument {
         val file = File(path)
-        val inputStream = FileInputStream(file)
         val outputFile = File(file.parent, "copy_" + file.name)
-        val outputStream = FileOutputStream(outputFile)
-        IOUtils.copy(inputStream, outputStream)
-        outputStream.close()
+        FileInputStream(file).use { inputStream ->
+            FileOutputStream(outputFile).use { outputStream ->
+                IOUtils.copy(inputStream, outputStream)
+            }
+        }
         val copyDoc = XWPFDocument(OPCPackage.open(FileInputStream(outputFile)))
         for (paragraph in copyDoc.paragraphs) {
             val runs = paragraph.runs
