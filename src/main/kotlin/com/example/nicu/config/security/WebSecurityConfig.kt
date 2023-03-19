@@ -27,14 +27,15 @@ class WebSecurityConfig(
 
     @Bean
     fun configure(httpSecurity: HttpSecurity): SecurityFilterChain {
-        httpSecurity.cors().and().csrf().disable()
+        httpSecurity.csrf().disable()
+            .cors().and()
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeHttpRequests()
             .requestMatchers("/api/auth/**").permitAll()
             .anyRequest().authenticated()
         httpSecurity.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter::class.java)
-        return httpSecurity.build();
+        return httpSecurity.build()
     }
 
     @Bean
