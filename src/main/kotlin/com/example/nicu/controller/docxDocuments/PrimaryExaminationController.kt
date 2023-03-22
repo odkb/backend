@@ -19,17 +19,13 @@ class PrimaryExaminationController(
 
     @PostMapping("/fillDocument")
     fun getData(@RequestBody examinationDto: PrimaryExaminationDto): ResponseEntity<ByteArray> {
-        primaryExaminationService.fillDocument(FILE_ADDRESS, examinationDto).use { doc ->
-            ByteArrayOutputStream().use { out ->
-                doc.write(out)
-                val documentBytes = out.toByteArray()
-                return ResponseEntity
-                    .ok()
-                    .contentLength(documentBytes.size.toLong())
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=file.docx")
-                    .body(documentBytes)
-            }
-        }
+        val doc = primaryExaminationService.fillDocument(FILE_ADDRESS, examinationDto)
+        val documentBytes = doc.toByteArray()
+        return ResponseEntity
+            .ok()
+            .contentLength(documentBytes.size.toLong())
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=file.docx")
+            .body(documentBytes)
     }
 }

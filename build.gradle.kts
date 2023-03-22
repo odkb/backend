@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.3"
+    id("org.springframework.boot") version "3.0.4"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
@@ -35,10 +35,10 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("org.flywaydb:flyway-core")
-    implementation("org.apache.poi:poi:5.2.3")
-    implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation("org.apache.logging.log4j:log4j-core:2.20.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.0.10")
+    implementation("org.docx4j:docx4j-JAXB-ReferenceImpl:11.4.9")
+
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")

@@ -1,7 +1,6 @@
 package com.example.nicu.dto.docxDocumentsDto
 
 import com.example.nicu.DtoFieldMap
-import com.fasterxml.jackson.databind.BeanDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -10,28 +9,26 @@ import kotlinx.serialization.Transient
 data class PrimaryExaminationDto(
     /*Паспортная часть + время и дата*/
 
+    val fullName: String? = null,
+
     val receiptDate: String? = null,
     val arrivalTime: String? = null,
     val fullNameChild: String? = null,
     val comeFurtherTreatmentAndExamination: String? = null,
     val born: String? = null,
     val admissionAge: String? = null,
-    @SerialName("dateToOPN")
-    val dateToOPN: String? = null,
+    @SerialName("dateToOPN") val dateToOPN: String? = null,
     val comesFrom: String? = null,
-    @SerialName("EPIDNumber")
-    val EPIDNumber: String? = null,
-    @SerialName("EPIDNumberDate")
-    val EPIDNumberDate: String? = null,
-    @SerialName("EPIDNumberDiagnosis")
-    val EPIDNumberDiagnosis: String? = null,
+    @SerialName("EPIDNumber") val EPIDNumber: String? = null,
+    @SerialName("EPIDNumberDate") val EPIDNumberDate: String? = null,
+    @SerialName("EPIDNumberDiagnosis") val EPIDNumberDiagnosis: String? = null,
 
     /*Анамнез матери*/
 
     val motherDateBirth: String? = null,
     val familyStatus: String? = null,
     val maternalIllnesses: String? = null,
-    val motherBloodGroup: String? = null,
+    val motherBloodGroup: String? = "Цоликлонами",
     val erythrocyteBody: String? = null,
     @SerialName("HIVTestingMother")
     val HIVTestingMother: String? = null,
@@ -95,16 +92,23 @@ data class PrimaryExaminationDto(
     val salineCount: String? = "0",
 
     val amountAssistanceDeliveryRoom: String? = null,
-    val diseaseHistory: String? = null,
 
-    /*Стандарт осмотра*/
+    /*До ОПН проведено лечение*/
 
     val respiratorySupport: String? = null,
+    val respiratorySupportStart: String? = null,
+    val respiratorySupportEnd: String? = null,
     val drugTherapy: String? = null,
-    val deeding: String? = null,
     val venousAccess: String? = null,
+    val venousAccessStart: String? = null,
+    val venousAccessEnd: String? = null,
+    val venousAccessExtra: String? = null,
     val phototherapy: String? = null,
+    val phototherapyStart: String? = null,
+    val phototherapyEnd: String? = null,
     val hypothermia: String? = null,
+    val hypothermiaStart: String? = null,
+    val hypothermiaEnd: String? = null,
 
     /*Стандарт осмотра*/
 
@@ -193,6 +197,7 @@ data class PrimaryExaminationDto(
     val noiseExtra: String? = null,
     val pulseDetermined: String? = null,
     val paleSpotSymptom: String? = null,
+    val childBloodType: String? = "Цоликлонами",
 
     /*Пищеварительная система*/
 
@@ -227,16 +232,34 @@ data class PrimaryExaminationDto(
     val structureExternalGenitaliaExtra: String? = null,
     val externalGenitalsFeatures: String? = null,
 
-    /*Остальное*/
+    /*Данные о заболевании*/
 
-    val mainSyndromesAdmission: String? = null,
-    val diagnosisAdmission: String? = null,
-    val surveyPlan: String? = null,
+    val diseaseHistory: String? = null,
+    val diseaseDynamics: String? = null,
+    val mainSyndromesAdmission: List<String>? = null,
+
+    val diagnosisMain: String? = null,
+    val diagnosisMainExtra: String? = null,
+    val diagnosisMainComplication: String? = null,
+    val diagnosisBackground: String? = null,
+    val diagnosisRelated: String? = null,
+    val diagnosisGeneral: String? = null,
+
+    val diagnosisAdmissionMain: String? = null,
+    val diagnosisAdmissionMainExtra: String? = null,
+    val diagnosisAdmissionMainComplication: String? = null,
+    val diagnosisAdmissionBackground: String? = null,
+    val diagnosisAdmissionRelated: String? = null,
+    val diagnosisAdmissionGeneral: String? = null,
+
+    /*План обследования*/
+
+    val surveyPlan: List<String>? = null,
+    val surveyPlanExtra: String? = null,
     val carePlan: String? = null,
     val treatmentPlan: String? = null,
     val parenteralNutrition: String? = null,
     val nutritionCalculation: String? = null,
-    val childBloodType: String? = null,
     val textConclusion: String? = null,
 ) : DocsDto {
     @Transient
