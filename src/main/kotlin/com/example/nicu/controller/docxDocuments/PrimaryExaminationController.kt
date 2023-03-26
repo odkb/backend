@@ -14,12 +14,13 @@ class PrimaryExaminationController(
     private val primaryExaminationService: PrimaryExaminationService,
 ) {
     companion object {
-        const val FILE_ADDRESS = "src/main/resources/templates/primary_examination_OPN.docx"
+        const val FILE_RESOURCE = "templates/primary_examination_OPN.docx"
     }
 
     @PostMapping("/fillDocument")
     fun getData(@RequestBody examinationDto: PrimaryExaminationDto): ResponseEntity<ByteArray> {
-        val doc = primaryExaminationService.fillDocument(FILE_ADDRESS, examinationDto)
+        val inputStream = javaClass.classLoader.getResourceAsStream(FILE_RESOURCE)
+        val doc = primaryExaminationService.fillDocument(inputStream, examinationDto)
         val documentBytes = doc.toByteArray()
         return ResponseEntity
             .ok()

@@ -1,6 +1,12 @@
-FROM amazoncorretto:17-alpine-jdk
-ARG JAR_FILE=build/libs/nicu-0.0.1-SNAPSHOT.jar
-WORKDIR /opt/app
-COPY ${JAR_FILE} nicuOPBackend.jar
-ENTRYPOINT ["java","-jar","nicuOPBackend.jar"]
+#stage 1: Build
+FROM gradle:7.6.1-jdk17 AS build
+WORKDIR /app
+COPY . .
+RUN gradle clean build -x test --no-daemon
+
+#stage 2: Create the final image
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]

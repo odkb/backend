@@ -3,76 +3,86 @@ package com.example.nicu.service.docxDocuments
 import com.example.nicu.dto.docxDocumentsDto.DocsDto
 import jakarta.xml.bind.JAXBElement
 import org.docx4j.Docx4J
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage
 import org.docx4j.wml.*
 import org.docx4j.wml.TcPrInner.TcBorders
 import org.springframework.stereotype.Service
+import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.File
+import java.io.InputStream
 import java.math.BigInteger
 
 
 @Service
 class PrimaryExaminationService {
-    fun fillDocument(path: String, dto: DocsDto): ByteArrayOutputStream {
-        val file = File(path)
-        val outputFile = File(file.parent, "copy_" + file.name)
-        if (!outputFile.exists())
-            file.copyTo(outputFile)
-        val sourceDocx = Docx4J.load(file)
-        val targetDocx = Docx4J.load(outputFile)
+    fun fillDocument(inputStream: InputStream, dto: DocsDto): ByteArrayOutputStream {
+        val sourceDocx = Docx4J.load(inputStream)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        sourceDocx.save(byteArrayOutputStream)
+        val targetDocx = WordprocessingMLPackage.load(ByteArrayInputStream(byteArrayOutputStream.toByteArray()))
         val sourceBody = sourceDocx.mainDocumentPart.contents.body
         val targetBody = targetDocx.mainDocumentPart.contents.body.also { it.content.clear() }
 
 
         for (sourceContent in sourceBody.content) {
-            val unwrappedContent = if (sourceContent is JAXBElement<*>) sourceContent.value else sourceContent
-            when (unwrappedContent) {
-                is P -> {
-                    val updatedText = searchRegex(unwrappedContent.toString(), dto)
-                    val factory = ObjectFactory.get()
-                    val targetParagraph = addParagraph(factory, updatedText)
-                    targetBody.content.add(targetParagraph)
-                }
-
-                is Tbl -> {
-                    val factory = ObjectFactory.get()
-                    val targetTable = factory.createTbl()
-                    val tblPr = factory.createTblPr()
-                    val tblBorders = factory.createTblBorders()
-                    setBorders(factory, tblBorders)
-                    tblPr.tblBorders = tblBorders
-                    for (sourceRow in unwrappedContent.content.filterIsInstance<Tr>()) {
-                        val targetRow = factory.createTr()
-                        for (wrappedCell in sourceRow.content) {
-                            if (wrappedCell is JAXBElement<*> && wrappedCell.value is Tc) {
-                                val sourceCell = wrappedCell.value as Tc
-                                val targetCell = factory.createTc()
-
-                                val tcPr = factory.createTcPr()
-                                val tcBorders = factory.createTcPrInnerTcBorders()
-                                setBorders(factory, tcBorders)
-                                tcPr.tcBorders = tcBorders
-
-                                val updatedText =
-                                    searchRegex(sourceCell.content.filterIsInstance<P>().joinToString(), dto)
-                                val targetParagraph = addParagraph(factory, updatedText)
-                                targetCell.content.add(targetParagraph)
-
-                                targetCell.tcPr = tcPr
-                                targetRow.content.add(targetCell)
-                            }
-                        }
-                        targetTable.content.add(targetRow)
-                    }
-                    targetTable.tblPr = tblPr
-                    targetBody.content.add(targetTable)
-                }
+            when (val unwrappedContent = if (sourceContent is JAXBElement<*>) sourceContent.value else sourceContent) {
+                is P -> fillParagraph(unwrappedContent, dto, targetBody)
+                is Tbl -> fillTable(unwrappedContent, dto, targetBody)
             }
         }
 
         val outputStream = ByteArrayOutputStream()
         Docx4J.save(targetDocx, outputStream)
         return outputStream
+    }
+
+    private fun fillParagraph(
+        unwrappedContent: Any,
+        dto: DocsDto,
+        targetBody: Body
+    ) {
+        val updatedText = searchRegex(unwrappedContent.toString(), dto)
+        val factory = ObjectFactory.get()
+        val targetParagraph = addParagraph(factory, updatedText)
+        targetBody.content.add(targetParagraph)
+    }
+
+    private fun fillTable(
+        unwrappedContent: Tbl,
+        dto: DocsDto,
+        targetBody: Body
+    ) {
+        val factory = ObjectFactory.get()
+        val targetTable = factory.createTbl()
+        val tblPr = factory.createTblPr()
+        val tblBorders = factory.createTblBorders()
+        setBorders(factory, tblBorders)
+        tblPr.tblBorders = tblBorders
+        for (sourceRow in unwrappedContent.content.filterIsInstance<Tr>()) {
+            val targetRow = factory.createTr()
+            for (wrappedCell in sourceRow.content) {
+                if (wrappedCell is JAXBElement<*> && wrappedCell.value is Tc) {
+                    val sourceCell = wrappedCell.value as Tc
+                    val targetCell = factory.createTc()
+
+                    val tcPr = factory.createTcPr()
+                    val tcBorders = factory.createTcPrInnerTcBorders()
+                    setBorders(factory, tcBorders)
+                    tcPr.tcBorders = tcBorders
+
+                    val updatedText =
+                        searchRegex(sourceCell.content.filterIsInstance<P>().joinToString(), dto)
+                    val targetParagraph = addParagraph(factory, updatedText)
+                    targetCell.content.add(targetParagraph)
+
+                    targetCell.tcPr = tcPr
+                    targetRow.content.add(targetCell)
+                }
+            }
+            targetTable.content.add(targetRow)
+        }
+        targetTable.tblPr = tblPr
+        targetBody.content.add(targetTable)
     }
 
     private fun addParagraph(factory: ObjectFactory, updatedText: String): P {

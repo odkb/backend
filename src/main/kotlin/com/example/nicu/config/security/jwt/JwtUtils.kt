@@ -15,16 +15,16 @@ private val logger = KotlinLogging.logger {}
 
 @Component
 class JwtUtils {
-    @Value("\${app.jwtSecret}")
+    @Value("\${jwt.secret}")
     private lateinit var jwtSecret: String
 
-    @Value("\${app.jwtExpirationMs}")
-    private lateinit var jwtExpirationMs: String
+    @Value("\${jwt.expiration}")
+    private lateinit var jwtExpiration: String
 
     fun generateJwtToken(authentication: Authentication): String {
         val userPrincipal: User = authentication.principal as User
         logger.debug { "Generating JWT token" }
-        val expirationTimeMillis = Date().time + jwtExpirationMs.toLong()
+        val expirationTimeMillis = Date().time + jwtExpiration.toLong()
         val expirationDate = Date(expirationTimeMillis)
         return Jwts.builder()
             .setSubject(userPrincipal.username)
