@@ -18,7 +18,7 @@ class DtoFieldMap<T : DocsDto>(dtoClass: KClass<T>) {
     fun getFieldValue(dto: T, fieldName: String): String {
         return when (val field = fieldMap[fieldName]?.get(dto)) {
             is List<*> -> field.joinToString(", ")
-            null -> "Не выбрано"
+            null, "" -> "Не выбрано"
             else -> field.toString()
         }
     }
