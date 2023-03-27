@@ -3,6 +3,6 @@ Dockerfile
 *.iml
 *.log
 
-build/
+#build/
 out/
 .gradle/
