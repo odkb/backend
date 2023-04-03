@@ -1,6 +1,8 @@
 package com.example.nicu
 
 import com.example.nicu.dto.docxDocumentsDto.DocsDto
+import com.example.nicu.utils.formatToddMMyyyy
+import java.time.LocalDate
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
@@ -19,6 +21,7 @@ class DtoFieldMap<T : DocsDto>(dtoClass: KClass<T>) {
         return when (val field = fieldMap[fieldName]?.get(dto)) {
             is List<*> -> field.joinToString(", ")
             null, "" -> "Не выбрано"
+            is LocalDate -> field.formatToddMMyyyy()
             else -> field.toString()
         }
     }

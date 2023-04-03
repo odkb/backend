@@ -1,29 +1,49 @@
 package com.example.nicu.dto.docxDocumentsDto
 
 import com.example.nicu.DtoFieldMap
+import com.example.nicu.utils.LocalDateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import java.time.LocalDate
+import kotlin.math.abs
 
 @Serializable
 data class PrimaryExaminationDto(
     /*Паспортная часть + время и дата*/
 
     val fullName: String? = null,
-
-    val receiptDate: String? = null,
+    @Serializable(LocalDateSerializer::class)
+    val receiptDate: LocalDate? = null,
     val arrivalTime: String? = null,
     val fullNameChild: String? = null,
     val comeFurtherTreatmentAndExamination: String? = null,
     val born: String? = null,
+    val bornExtra: String? = null,
+    //del
     val admissionAge: String? = null,
+    var admissionAgeMonth: Int = 0,
+    var admissionAgeDay: Int = 0,
+    @Serializable(LocalDateSerializer::class)
+    val birthday: LocalDate? = null,
     @SerialName("dateToOPN") val dateToOPN: String? = null,
     val comesFrom: String? = null,
     @SerialName("EPIDNumber") val EPIDNumber: String? = null,
-    @SerialName("EPIDNumberDate") val EPIDNumberDate: String? = null,
+    @Serializable(LocalDateSerializer::class)
+    @SerialName("EPIDNumberDate") val EPIDNumberDate: LocalDate? = null,
     @SerialName("EPIDNumberDiagnosis") val EPIDNumberDiagnosis: String? = null,
 
     /*Анамнез матери*/
+    val motherFullName: String? = null,
+    val motherRegistration: String? = null,
+    val motherAccommodation: String? = null,
+    val motherOMS: String? = null,
+    val motherOMSNumber: String? = null,
+    val motherSNILS: String? = null,
+    val motherPassport: String? = null,
+    val motherPhoneNumber: String? = null,
+    val fatherPhoneNumber: String? = null,
+    val motherWithChild: String? = null,
 
     val motherDateBirth: String? = null,
     val familyStatus: String? = null,
@@ -36,6 +56,7 @@ data class PrimaryExaminationDto(
     val HIVTestingFather: String? = null,
     val maternalInfectiousHistory: String? = null,
 
+
     /*Течение беременности*/
 
     val pregnancy: String? = null,
@@ -43,20 +64,21 @@ data class PrimaryExaminationDto(
     val previousPregnancies: String? = null,
     val dataSiblings: String? = null,
     val featuresCoursePregnancy: String? = null,
+    val previousPregnanciesExtra: String? = null,
     val steroidProphylaxis: String? = null,
+    val steroidProphylaxisExtra: String? = null,
 
     /*Течение родов*/
 
     val gestationalAge: String? = null,
     val featuresCourseChildbirth: String? = null,
     val presentation: String? = null,
-    val headPresentation: String? = "",
     val methodDelivery: String? = null,
     val methodDeliveryType: String? = "",
     val durationLabor: String? = null,
     val strainingPeriod: String? = null,
     val anhydrousPeriod: String? = null,
-    val waters: String? = null,
+    val waters: List<String>? = null,
     val watersVolume: String? = "",
     val gender: String? = null,
     val birthWeight: String? = null,
@@ -74,7 +96,6 @@ data class PrimaryExaminationDto(
     val ventilation: String? = null,
     val ventilationType: List<String>? = null,
     val ventilationTime: String? = null,
-    val ventilationInfo: String? = null,
 
     val intubation: String? = null,
     val intubationTime: String? = null,
@@ -262,8 +283,12 @@ data class PrimaryExaminationDto(
     val nutritionCalculation: String? = null,
     val textConclusion: String? = null,
 ) : DocsDto {
+    init {
+        this.admissionAgeMonth = abs((receiptDate?.month?.value ?: 0) - (birthday?.month?.value ?: 0))
+        this.admissionAgeDay = abs((receiptDate?.dayOfMonth ?: 0) - (birthday?.dayOfMonth ?: 0))
+    }
+
     @Transient
     private val dtoFieldMap = DtoFieldMap(PrimaryExaminationDto::class)
-    override fun getFieldValue(fieldName: String): String =
-        dtoFieldMap.getFieldValue(this, fieldName)
+    override fun getFieldValue(fieldName: String): String = dtoFieldMap.getFieldValue(this, fieldName)
 }
