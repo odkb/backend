@@ -13,6 +13,10 @@ import kotlin.reflect.full.memberProperties
 class DtoFieldMap<T : DocsDto>(dtoClass: KClass<T>) {
     private val fieldMap = HashMap<String, KProperty1<T, *>>()
 
+    companion object {
+        const val EMPTY_FIELD_VALUE = ""
+    }
+
     init {
         dtoClass.memberProperties.forEach { fieldMap[it.name] = it }
     }
@@ -20,7 +24,7 @@ class DtoFieldMap<T : DocsDto>(dtoClass: KClass<T>) {
     fun getFieldValue(dto: T, fieldName: String): String {
         return when (val field = fieldMap[fieldName]?.get(dto)) {
             is List<*> -> field.joinToString(", ")
-            null, "" -> "Не выбрано"
+            null, "" -> EMPTY_FIELD_VALUE
             is LocalDate -> field.formatToddMMyyyy()
             else -> field.toString()
         }

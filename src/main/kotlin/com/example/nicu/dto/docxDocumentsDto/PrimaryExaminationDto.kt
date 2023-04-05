@@ -11,7 +11,6 @@ import kotlin.math.abs
 @Serializable
 data class PrimaryExaminationDto(
     /*Паспортная часть + время и дата*/
-
     val fullName: String? = null,
     @Serializable(LocalDateSerializer::class)
     val receiptDate: LocalDate? = null,
@@ -20,35 +19,40 @@ data class PrimaryExaminationDto(
     val comeFurtherTreatmentAndExamination: String? = null,
     val born: String? = null,
     val bornExtra: String? = null,
-    //del
-    val admissionAge: String? = null,
     var admissionAgeMonth: Int = 0,
     var admissionAgeDay: Int = 0,
     @Serializable(LocalDateSerializer::class)
     val birthday: LocalDate? = null,
-    @SerialName("dateToOPN") val dateToOPN: String? = null,
     val comesFrom: String? = null,
-    @SerialName("EPIDNumber") val EPIDNumber: String? = null,
+    @SerialName("EPIDNumber")
+    val EPIDNumber: String? = null,
+
     @Serializable(LocalDateSerializer::class)
-    @SerialName("EPIDNumberDate") val EPIDNumberDate: LocalDate? = null,
-    @SerialName("EPIDNumberDiagnosis") val EPIDNumberDiagnosis: String? = null,
+    @SerialName("EPIDNumberDate")
+    val EPIDNumberDate: LocalDate? = null,
+
+    @SerialName("EPIDNumberDiagnosis")
+    val EPIDNumberDiagnosis: String? = null,
 
     /*Анамнез матери*/
     val motherFullName: String? = null,
     val motherRegistration: String? = null,
     val motherAccommodation: String? = null,
+    @SerialName("motherOMS")
     val motherOMS: String? = null,
+    @SerialName("motherOMSNumber")
     val motherOMSNumber: String? = null,
+    @SerialName("motherSNILS")
     val motherSNILS: String? = null,
     val motherPassport: String? = null,
     val motherPhoneNumber: String? = null,
     val fatherPhoneNumber: String? = null,
     val motherWithChild: String? = null,
-
-    val motherDateBirth: String? = null,
+    @Serializable(LocalDateSerializer::class)
+    val motherDateBirth: LocalDate? = null,
     val familyStatus: String? = null,
     val maternalIllnesses: String? = null,
-    val motherBloodGroup: String? = "Цоликлонами",
+    val motherBloodGroup: String? = null,
     val erythrocyteBody: String? = null,
     @SerialName("HIVTestingMother")
     val HIVTestingMother: String? = null,
@@ -74,12 +78,12 @@ data class PrimaryExaminationDto(
     val featuresCourseChildbirth: String? = null,
     val presentation: String? = null,
     val methodDelivery: String? = null,
-    val methodDeliveryType: String? = "",
+    val methodDeliveryType: String? = null,
     val durationLabor: String? = null,
     val strainingPeriod: String? = null,
     val anhydrousPeriod: String? = null,
     val waters: List<String>? = null,
-    val watersVolume: String? = "",
+    val watersVolume: String? = null,
     val gender: String? = null,
     val birthWeight: String? = null,
     val length: String? = null,
@@ -91,7 +95,7 @@ data class PrimaryExaminationDto(
 
     val firstHelp: String? = null,
     val firstHelpType: List<String>? = null,
-    val anotherFirstHelp: String? = "",
+    val anotherFirstHelp: String? = null,
 
     val ventilation: String? = null,
     val ventilationType: List<String>? = null,
@@ -173,8 +177,6 @@ data class PrimaryExaminationDto(
     val skinColorType: String? = null,
     val damage: String? = null,
     val additionallyDamage: String? = null,
-    val hematomas: String? = null,
-    val additionallyHematomas: String? = null,
     val rashes: String? = null,
     val rashesLocation: String? = null,
     val rashesProgres: String? = null,
@@ -190,10 +192,11 @@ data class PrimaryExaminationDto(
     val edemaType: String? = null,
     val elasticity: String? = null,
     val turgor: String? = null,
-    val cordRemnant: String? = null,
+    val cordRemnant: List<String>? = null,
     val umbilicalWound: String? = null,
-    val mucous: String? = null,
+    val mucous: List<String>? = null,
     val mucousHumidity: String? = null,
+    val salivation: String? = null,
 
     /*Дыхательная сиситема*/
 
@@ -202,8 +205,7 @@ data class PrimaryExaminationDto(
     val chestShapeExtra: String? = null,
     val breathingThroughNose: String? = null,
     val biomechanicsRespiration: String? = null,
-    val auscultatoryPicture: String? = null,
-    val auscultatoryPictureExtra: String? = null,
+    val auscultatoryPicture: List<String>? = null,
     val auscultatoryPictureExtraText: String? = null,
     val wheezing: String? = null,
     val crepitus: String? = null,
@@ -215,18 +217,23 @@ data class PrimaryExaminationDto(
     val heartSounds: String? = null,
     val heartRate: String? = null,
     val noise: String? = null,
-    val noiseExtra: String? = null,
+    val noiseExtra: List<String>? = null,
     val pulseDetermined: String? = null,
     val paleSpotSymptom: String? = null,
-    val childBloodType: String? = "Цоликлонами",
+    val childBloodType: String = """Цоликлонами анти А                   анти В                       резус\n" +
+            "Определена группа крови и резус принадлежность (и выбор вариантов группы крови, как при заполнении формы)\n" +
+            "Кровь отправлена в отделение трансфузиологии для подтверждения.\n" +
+            "                                                      Подпись врача                             ФИО""",
 
     /*Пищеварительная система*/
 
     val stomach: List<String>? = null,
     val peristalsis: String? = null,
-    val liver: String? = null,
+    val liver: List<String>? = null,
+    val liverRibs: String? = null,
     val liverSize: String? = null,
     val spleen: String? = null,
+    val spleenSize: String? = null,
     val bowelMovement: String? = null,
     val bowelMovementCount: String? = null,
     val bowelMovementType: String? = null,
@@ -241,9 +248,8 @@ data class PrimaryExaminationDto(
     /*Мочевидная система система*/
 
     val kidneys: String? = null,
-    val diuresisMl: String? = null,
-    val diuresisKg: String? = null,
-    val diuresisH: String? = null,
+    val diuresis: String? = null,
+    val diuresisExtra: String? = null,
     val stimulationDiuresis: String? = null,
 
     /*Наружные половые органы*/
@@ -259,14 +265,8 @@ data class PrimaryExaminationDto(
     val diseaseDynamics: String? = null,
     val mainSyndromesAdmission: List<String>? = null,
 
-    val diagnosisMain: String? = null,
-    val diagnosisMainExtra: String? = null,
-    val diagnosisMainComplication: String? = null,
-    val diagnosisBackground: String? = null,
-    val diagnosisRelated: String? = null,
-    val diagnosisGeneral: String? = null,
-
-    val diagnosisAdmissionMain: String? = null,
+    var combineDiagnosis: String? = null,
+    val diagnosisAdmissionMain: List<String>? = null,
     val diagnosisAdmissionMainExtra: String? = null,
     val diagnosisAdmissionMainComplication: String? = null,
     val diagnosisAdmissionBackground: String? = null,
@@ -284,8 +284,11 @@ data class PrimaryExaminationDto(
     val textConclusion: String? = null,
 ) : DocsDto {
     init {
-        this.admissionAgeMonth = abs((receiptDate?.month?.value ?: 0) - (birthday?.month?.value ?: 0))
-        this.admissionAgeDay = abs((receiptDate?.dayOfMonth ?: 0) - (birthday?.dayOfMonth ?: 0))
+        admissionAgeMonth = abs((receiptDate?.month?.value ?: 0) - (birthday?.month?.value ?: 0))
+        admissionAgeDay = abs((receiptDate?.dayOfMonth ?: 0) - (birthday?.dayOfMonth ?: 0))
+        if (diagnosisAdmissionMain != null && diagnosisAdmissionMain.size > 1) {
+            combineDiagnosis = "Комбинированное основное заболевание"
+        }
     }
 
     @Transient

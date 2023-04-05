@@ -1,5 +1,6 @@
 package com.example.nicu.service.docxDocuments
 
+import com.example.nicu.DtoFieldMap
 import com.example.nicu.dto.docxDocumentsDto.DocsDto
 import jakarta.xml.bind.JAXBElement
 import org.docx4j.Docx4J
@@ -41,8 +42,9 @@ class PrimaryExaminationService {
         dto: DocsDto,
         targetBody: Body
     ) {
-        val updatedText = searchRegex(unwrappedContent.toString(), dto)
+        val updatedText = replacePlaceholdersWithValues(unwrappedContent.toString(), dto)
         val factory = ObjectFactory.get()
+        if (updatedText == null) return
         val targetParagraph = addParagraph(factory, updatedText)
         targetBody.content.add(targetParagraph)
     }
@@ -63,6 +65,9 @@ class PrimaryExaminationService {
             for (wrappedCell in sourceRow.content) {
                 if (wrappedCell is JAXBElement<*> && wrappedCell.value is Tc) {
                     val sourceCell = wrappedCell.value as Tc
+                    val updatedText =
+                        replacePlaceholdersWithValues(sourceCell.content.filterIsInstance<P>().joinToString(), dto)
+                            ?: continue
                     val targetCell = factory.createTc()
 
                     val tcPr = factory.createTcPr()
@@ -70,8 +75,6 @@ class PrimaryExaminationService {
                     setBorders(factory, tcBorders)
                     tcPr.tcBorders = tcBorders
 
-                    val updatedText =
-                        searchRegex(sourceCell.content.filterIsInstance<P>().joinToString(), dto)
                     val targetParagraph = addParagraph(factory, updatedText)
                     targetCell.content.add(targetParagraph)
 
@@ -114,12 +117,41 @@ class PrimaryExaminationService {
         }
     }
 
-    private fun searchRegex(textValue: String, dto: DocsDto): String {
+    private fun replacePlaceholdersWithValues(textValue: String, dto: DocsDto): String? {
         val regex = Regex("""\$\{([^}]+)}""")
+        var success = true
         val updatedText = regex.replace(textValue) { matchResult ->
             val placeholder = matchResult.groupValues[1]
-            dto.getFieldValue(placeholder)
+            val replacement = getReplacementForPlaceholder(placeholder, dto)
+            if (replacement == null) {
+                success = false
+                ""
+            } else {
+                replacement
+            }
         }
-        return updatedText
+        return if (success) updatedText else null
+    }
+
+    private fun getReplacementForPlaceholder(placeholder: String, dto: DocsDto): String? {
+        val (parentFieldName, childPlaceholderName) = parsePlaceholder(placeholder)
+
+        return if (childPlaceholderName == null) {
+            dto.getFieldValue(parentFieldName)
+        } else {
+            val parentFieldValue = dto.getFieldValue(parentFieldName)
+            if (parentFieldValue == DtoFieldMap.EMPTY_FIELD_VALUE) {
+                null
+            } else {
+                dto.getFieldValue(childPlaceholderName)
+            }
+        }
+    }
+
+    private fun parsePlaceholder(placeholder: String): Pair<String, String?> {
+        val placeholderParts = placeholder.split(">")
+        val parentFieldName = placeholderParts.first()
+        val childPlaceholderName = if (placeholderParts.size == 2) placeholderParts.last() else null
+        return parentFieldName to childPlaceholderName
     }
 }
