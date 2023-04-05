@@ -44,16 +44,16 @@ class PrimaryExaminationService {
         val updatedText = replacePlaceholdersWithValues(unwrappedContent.toString(), dto)
         val factory = ObjectFactory.get()
         if (updatedText == null) return
-        val targetParagraph = addParagraph(factory, updatedText)
+        val targetParagraph = factory.addParagraph(updatedText)
         targetBody.content.add(targetParagraph)
     }
 
-    private fun addParagraph(factory: ObjectFactory, updatedText: String): P {
-        val targetText = factory.createText()
+    private fun ObjectFactory.addParagraph(updatedText: String): P {
+        val targetText = createText()
             .apply { value = updatedText }
-        val targetRun = factory.createR()
+        val targetRun = createR()
             .apply { content.add(targetText) }
-        return factory.createP()
+        return createP()
             .apply { content.add(targetRun) }
     }
 
@@ -106,7 +106,7 @@ class PrimaryExaminationService {
         }
         val tcPr = createTcPr().apply { this.tcBorders = tcBorders }
         return createTc().apply {
-            this.content.add(addParagraph(this@createTableCell, content))
+            this.content.add(this@createTableCell.addParagraph(content))
             this.tcPr = tcPr
         }
     }
