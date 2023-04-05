@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.invoke
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -29,16 +30,19 @@ class WebSecurityConfig(
     fun authenticationJwtTokenFilter() = AuthTokenFilter(jwtUtils, employeeDetails)
 
     @Bean
-    fun configure(httpSecurity: HttpSecurity): SecurityFilterChain {
-        httpSecurity.csrf().disable()
-            .cors().and()
-            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeHttpRequests()
-            .requestMatchers("/api/auth/**").permitAll()
-            .anyRequest().authenticated()
-        httpSecurity.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter::class.java)
-        return httpSecurity.build()
+    fun configure(http: HttpSecurity): SecurityFilterChain {
+        http.invoke {
+            csrf { disable() }
+            cors { }
+            exceptionHandling { authenticationEntryPoint = unauthorizedHandler }
+            authorizeRequests {
+                authorize("api/auth/**", permitAll)
+                authorize(anyRequest, authenticated)
+            }
+            sessionManagement { sessionCreationPolicy = SessionCreationPolicy.STATELESS }
+            addFilterBefore<UsernamePasswordAuthenticationFilter>(authenticationJwtTokenFilter())
+        }
+        return http.build()
     }
 
     @Bean
