@@ -282,7 +282,7 @@ data class PrimaryExaminationDto(
     val parenteralNutrition: String? = null,
     val nutritionCalculation: String? = null,
     val textConclusion: String? = null,
-) : DocsDto {
+) : DocumentDto {
     init {
         admissionAgeMonth = abs((receiptDate?.month?.value ?: 0) - (birthday?.month?.value ?: 0))
         admissionAgeDay = abs((receiptDate?.dayOfMonth ?: 0) - (birthday?.dayOfMonth ?: 0))

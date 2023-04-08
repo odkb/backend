@@ -1,5 +1,5 @@
 package com.example.nicu.dto.docxDocumentsDto
 
-sealed interface DocsDto {
+sealed interface DocumentDto {
     fun getFieldValue(fieldName: String): String
 }

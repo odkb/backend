@@ -7,41 +7,27 @@ import org.hibernate.Hibernate
 @Table(name = "employees")
 class EmployeeEntity(
     @Id
-    @Column(name = "employee_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: String? = null,
+    @Column(name = "employee_id", nullable = false)
+    var id: Long? = null,
 
-    @Column(name = "password")
-    var password: String? = null,
-
-    @Column(name = "username")
+    @Column(nullable = false)
     var username: String,
 
-    @Column(name = "first_name")
-    var firstName: String? = null,
+    @Column(nullable = false)
+    var password: String,
 
-    @Column(name = "last_name")
-    var lastName: String? = null,
+    @Column(name = "first_name", nullable = false)
+    var firstName: String,
 
-    @Column(name = "second_name")
-    var secondName: String? = null,
+    @Column(name = "last_name", nullable = false)
+    var lastName: String,
 
-    @Column(name = "params")
-    var params: String? = null,
-
-    @Column(name = "roles_id")
-    var rolesId: String? = null,
-
-    @Column(name = "reanimation_id")
-    var reanimationId: String? = null,
-
-    @Column(name = "specialisation")
-    var specialisation: String? = null,
-
-    @Column(name = "is_admin")
-    var isAdmin: Boolean,
+    @Column(name = "second_name", nullable = true)
+    var middleName: String? = null,
 ) {
-    fun getFullName() = "$lastName ${firstName?.get(0) ?: ""}. ${secondName?.get(0) ?: ""}."
+    @get:Transient
+    val fullName: String
+        get() = "$lastName ${firstName[0]}.${middleName?.let { " ${it[0]}." } ?: ""}"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

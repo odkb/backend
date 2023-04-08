@@ -1,6 +1,6 @@
 package com.example.nicu
 
-import com.example.nicu.dto.docxDocumentsDto.DocsDto
+import com.example.nicu.dto.docxDocumentsDto.DocumentDto
 import com.example.nicu.utils.formatToddMMyyyy
 import java.time.LocalDate
 import kotlin.reflect.KClass
@@ -10,7 +10,7 @@ import kotlin.reflect.full.memberProperties
 /*
 Класс для получения значения поля по его имени
  */
-class DtoFieldMap<T : DocsDto>(dtoClass: KClass<T>) {
+class DtoFieldMap<T : DocumentDto>(dtoClass: KClass<T>) {
     private val fieldMap = HashMap<String, KProperty1<T, *>>()
 
     companion object {

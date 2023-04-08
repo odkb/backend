@@ -1,7 +1,7 @@
 package com.example.nicu.service.docxDocuments
 
 import com.example.nicu.DtoFieldMap
-import com.example.nicu.dto.docxDocumentsDto.DocsDto
+import com.example.nicu.dto.docxDocumentsDto.DocumentDto
 import jakarta.xml.bind.JAXBElement
 import org.docx4j.Docx4J
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage
@@ -14,8 +14,8 @@ import java.math.BigInteger
 
 
 @Service
-class PrimaryExaminationService {
-    fun fillDocument(inputStream: InputStream, dto: DocsDto): ByteArrayOutputStream {
+class DocxDocumentService {
+    fun getDocumentAsWord(inputStream: InputStream, dto: DocumentDto): ByteArrayOutputStream {
         val sourceDocx = Docx4J.load(inputStream)
         val byteArrayOutputStream = ByteArrayOutputStream().also { sourceDocx.save(it) }
 
@@ -38,12 +38,12 @@ class PrimaryExaminationService {
 
     private fun fillParagraph(
         unwrappedContent: Any,
-        dto: DocsDto,
+        dto: DocumentDto,
         targetBody: Body
     ) {
-        val updatedText = replacePlaceholdersWithValues(unwrappedContent.toString(), dto)
         val factory = ObjectFactory.get()
-        if (updatedText == null) return
+        val updatedText = replacePlaceholdersWithValues(unwrappedContent.toString(), dto)
+            ?: return
         val targetParagraph = factory.addParagraph(updatedText)
         targetBody.content.add(targetParagraph)
     }
@@ -59,7 +59,7 @@ class PrimaryExaminationService {
 
     private fun fillTable(
         unwrappedContent: Tbl,
-        dto: DocsDto,
+        dto: DocumentDto,
         targetBody: Body
     ) {
         val factory = ObjectFactory.get()
@@ -119,7 +119,7 @@ class PrimaryExaminationService {
         }
     }
 
-    private fun replacePlaceholdersWithValues(textValue: String, dto: DocsDto): String? {
+    private fun replacePlaceholdersWithValues(textValue: String, dto: DocumentDto): String? {
         val regex = Regex("""\$\{([^}]+)}""")
         var success = true
         val updatedText = regex.replace(textValue) { matchResult ->
@@ -135,7 +135,7 @@ class PrimaryExaminationService {
         return if (success) updatedText else null
     }
 
-    private fun getReplacementForPlaceholder(placeholder: String, dto: DocsDto): String? {
+    private fun getReplacementForPlaceholder(placeholder: String, dto: DocumentDto): String? {
         val (parentFieldName, childPlaceholderName) = parsePlaceholder(placeholder)
 
         return if (childPlaceholderName == null) {

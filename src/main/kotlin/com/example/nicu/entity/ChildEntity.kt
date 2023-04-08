@@ -2,14 +2,15 @@ package com.example.nicu.entity
 
 import jakarta.persistence.*
 import org.hibernate.Hibernate
+import java.time.LocalDate
 
 @Entity
 @Table(name = "children")
 class ChildEntity(
     @Id
-    @Column(name = "child_id")
+    @Column(name = "child_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: String? = null,
+    var id: Long? = null,
 
     @Column(name = "historyID")
     var historyID: String? = null,
@@ -72,7 +73,7 @@ class ChildEntity(
     var pregnancy: String? = null,
 
     @Column(name = "childbirth")
-    var childbirth: String? = null,
+    var childbirth: LocalDate? = null,
 
     @Column(name = "childbirthCourse")
     var childbirthCourse: String? = null,

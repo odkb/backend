@@ -1,1 +1,1 @@
-create SCHEMA IF NOT EXISTS nicu_op;
+create SCHEMA IF NOT EXISTS ${flyway:defaultSchema};
