@@ -33,7 +33,7 @@ class PrimaryExaminationDocumentController(
         TODO("Not yet implemented")
     }
 
-    @PostMapping("/$DOCUMENT_TYPE/print")
+    @PostMapping("/$DOCUMENT_TYPE/actions/print")
     override fun printDocument(
         @RequestBody documentDto: PrimaryExaminationDto,
         @PathVariable childId: String
