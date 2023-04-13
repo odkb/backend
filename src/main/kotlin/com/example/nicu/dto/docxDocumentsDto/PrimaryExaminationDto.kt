@@ -1,10 +1,8 @@
 package com.example.nicu.dto.docxDocumentsDto
 
-import com.example.nicu.DtoFieldMap
 import com.example.nicu.utils.LocalDateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import java.time.LocalDate
 import kotlin.math.abs
 
@@ -282,7 +280,7 @@ data class PrimaryExaminationDto(
     val parenteralNutrition: String? = null,
     val nutritionCalculation: String? = null,
     val textConclusion: String? = null,
-) : DocumentDto {
+) : DocumentDto() {
     init {
         admissionAgeMonth = abs((receiptDate?.month?.value ?: 0) - (birthday?.month?.value ?: 0))
         admissionAgeDay = abs((receiptDate?.dayOfMonth ?: 0) - (birthday?.dayOfMonth ?: 0))
@@ -290,8 +288,4 @@ data class PrimaryExaminationDto(
             combineDiagnosis = "Комбинированное основное заболевание"
         }
     }
-
-    @Transient
-    override val dtoFieldMap = DtoFieldMap(this)
-    override fun getFieldValue(fieldName: String): String = dtoFieldMap.getFieldValue(this, fieldName)
 }
