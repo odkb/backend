@@ -9,7 +9,7 @@ data class DynamicObservationSheetDto(
     val a: String? = null,
 ) : DocumentDto {
     @Transient
-    private val dtoFieldMap = DtoFieldMap(DynamicObservationSheetDto::class)
+    override val dtoFieldMap = DtoFieldMap(this)
 
     override fun getFieldValue(fieldName: String): String = dtoFieldMap.getFieldValue(this, fieldName)
 }

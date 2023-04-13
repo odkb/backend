@@ -10,7 +10,7 @@ import kotlin.reflect.full.memberProperties
 /*
 Класс для получения значения поля по его имени
  */
-class DtoFieldMap<T : DocumentDto>(dtoClass: KClass<T>) {
+class DtoFieldMap<T : DocumentDto>(dto: T) {
     private val fieldMap = HashMap<String, KProperty1<T, *>>()
 
     companion object {
@@ -18,6 +18,8 @@ class DtoFieldMap<T : DocumentDto>(dtoClass: KClass<T>) {
     }
 
     init {
+        @Suppress("UNCHECKED_CAST")
+        val dtoClass = dto::class as KClass<T>
         dtoClass.memberProperties.forEach { fieldMap[it.name] = it }
     }
 

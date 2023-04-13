@@ -292,6 +292,6 @@ data class PrimaryExaminationDto(
     }
 
     @Transient
-    private val dtoFieldMap = DtoFieldMap(PrimaryExaminationDto::class)
+    override val dtoFieldMap = DtoFieldMap(this)
     override fun getFieldValue(fieldName: String): String = dtoFieldMap.getFieldValue(this, fieldName)
 }
