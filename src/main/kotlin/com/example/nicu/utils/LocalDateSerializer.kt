@@ -10,15 +10,24 @@ import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalSerializationApi::class)
 @Serializer(forClass = LocalDate::class)
-object LocalDateSerializer : KSerializer<LocalDate> {
+object LocalDateSerializer : KSerializer<LocalDate?> {
     private val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     private val outputFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
-    override fun serialize(encoder: Encoder, value: LocalDate) {
-        encoder.encodeString(value.format(outputFormatter))
+    override fun serialize(encoder: Encoder, value: LocalDate?) {
+        if (value == null) {
+            encoder.encodeNull()
+        } else {
+            encoder.encodeString(value.format(outputFormatter))
+        }
     }
 
-    override fun deserialize(decoder: Decoder): LocalDate {
-        return LocalDate.parse(decoder.decodeString(), inputFormatter)
+    override fun deserialize(decoder: Decoder): LocalDate? {
+        val dateString = decoder.decodeString()
+        return if (dateString.isEmpty()) {
+            null
+        } else {
+            LocalDate.parse(dateString, inputFormatter)
+        }
     }
 }
