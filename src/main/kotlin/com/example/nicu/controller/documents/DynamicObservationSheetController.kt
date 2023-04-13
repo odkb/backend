@@ -1,6 +1,6 @@
 package com.example.nicu.controller.documents
 
-import com.example.nicu.dto.docxDocumentsDto.PrimaryExaminationDto
+import com.example.nicu.dto.docxDocumentsDto.DynamicObservationSheetDto
 import com.example.nicu.service.docxDocuments.DocxDocumentService
 import mu.KotlinLogging
 import org.springframework.http.HttpHeaders
@@ -8,37 +8,36 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.io.*
 
 private val logger = KotlinLogging.logger {}
 
 @RestController
 @RequestMapping("/api/children/{childId}/documents")
-class PrimaryExaminationDocumentController(
+class DynamicObservationSheetController(
     private val docxDocumentService: DocxDocumentService,
-) : DocumentController<PrimaryExaminationDto> {
+) : DocumentController<DynamicObservationSheetDto> {
     companion object {
         const val DOCUMENT_TYPE = "primary-examination"
     }
 
-    @GetMapping("/$DOCUMENT_TYPE")
+    @GetMapping("/${DOCUMENT_TYPE}")
     override fun getDocument(
         @PathVariable childId: String
-    ): ResponseEntity<PrimaryExaminationDto> {
+    ): ResponseEntity<DynamicObservationSheetDto> {
         TODO("Not yet implemented")
     }
 
-    @PostMapping("/$DOCUMENT_TYPE")
+    @PostMapping("/${DOCUMENT_TYPE}")
     override fun saveDocument(
-        @RequestBody documentDto: PrimaryExaminationDto,
+        @RequestBody documentDto: DynamicObservationSheetDto,
         @PathVariable childId: String
-    ): ResponseEntity<PrimaryExaminationDto> {
+    ): ResponseEntity<DynamicObservationSheetDto> {
         TODO("Not yet implemented")
     }
 
-    @PostMapping("/$DOCUMENT_TYPE/actions/print")
+    @PostMapping("/${DOCUMENT_TYPE}/actions/print")
     override fun printDocument(
-        @RequestBody documentDto: PrimaryExaminationDto,
+        @RequestBody documentDto: DynamicObservationSheetDto,
         @PathVariable childId: String
     ): ResponseEntity<ByteArray> {
         return try {
@@ -48,7 +47,7 @@ class PrimaryExaminationDocumentController(
                 .ok()
                 .contentLength(documentBytes.size.toLong())
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=$DOCUMENT_TYPE.docx")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=${DOCUMENT_TYPE}.docx")
                 .body(documentBytes)
         } catch (e: Exception) {
             logger.error { e.message }

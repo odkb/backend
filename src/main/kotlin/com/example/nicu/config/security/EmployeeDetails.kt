@@ -16,7 +16,8 @@ class EmployeeDetails(
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
         val user: EmployeeEntity = employeeRepository.findByUsername(username)
-            .orElseThrow { UsernameNotFoundException("User Not Found with username: $username") }
+            ?: throw UsernameNotFoundException("User Not Found with username: $username")
+
         return User
             .withUsername(user.username)
             .accountExpired(false)

@@ -3,6 +3,7 @@ package com.example.nicu.controller
 import com.example.nicu.config.security.jwt.JwtUtils
 import com.example.nicu.dto.JwtResponse
 import com.example.nicu.dto.LoginRequest
+import com.example.nicu.entity.EmployeeEntity
 import com.example.nicu.service.db.EmployeeEntityService
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -28,12 +29,12 @@ class AuthController(
         )
         SecurityContextHolder.getContext().authentication = authentication
         val jwt: String = jwtUtils.generateJwtToken(authentication)
-        val userOptional = employeeEntityService.getEmployee(authentication.name)
-        return if (userOptional.isEmpty) {
+        val user: EmployeeEntity? = employeeEntityService.getEmployee(authentication.name)
+        return if (user == null) {
             ResponseEntity.badRequest().build()
         } else {
             ResponseEntity.ok(
-                JwtResponse(jwt, userOptional.get().fullName)
+                JwtResponse(jwt, user.fullName)
             )
         }
     }

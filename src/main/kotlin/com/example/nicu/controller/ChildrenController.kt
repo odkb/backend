@@ -4,6 +4,7 @@ import com.example.nicu.dto.child.ChildIdDto
 import com.example.nicu.dto.child.ChildInfoDto
 import com.example.nicu.service.db.ChildEntityService
 import org.springframework.data.domain.Page
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -22,8 +23,9 @@ class ChildrenController(
     }
 
     @PostMapping("/import")
-    fun importChild(@RequestBody childRequest: ChildIdDto) {
+    fun importChild(@RequestBody childRequest: ChildIdDto): ResponseEntity<ChildInfoDto> {
         //реализовать после получения API.
         childEntityService.importChildFromOdkbAPI()
+        return ResponseEntity.status(HttpStatus.CREATED).build()
     }
 }

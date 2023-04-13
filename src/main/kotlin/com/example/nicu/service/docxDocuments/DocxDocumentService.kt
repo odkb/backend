@@ -9,13 +9,16 @@ import org.docx4j.wml.*
 import org.springframework.stereotype.Service
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.InputStream
+import java.io.FileNotFoundException
 import java.math.BigInteger
 
 
 @Service
 class DocxDocumentService {
-    fun getDocumentAsWord(inputStream: InputStream, dto: DocumentDto): ByteArrayOutputStream {
+    fun getDocumentAsWord(fileName: String, dto: DocumentDto): ByteArrayOutputStream {
+        val fileResource = "templates/$fileName.docx"
+        val inputStream = javaClass.classLoader.getResourceAsStream(fileResource)
+            ?: throw FileNotFoundException("Resource file not found: $fileResource")
         val sourceDocx = Docx4J.load(inputStream)
         val byteArrayOutputStream = ByteArrayOutputStream().also { sourceDocx.save(it) }
 
