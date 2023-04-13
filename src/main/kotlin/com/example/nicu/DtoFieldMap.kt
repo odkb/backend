@@ -10,7 +10,7 @@ import kotlin.reflect.full.memberProperties
 /*
 Класс для получения значения поля по его имени
  */
-class DtoFieldMap<T : DocumentDto>(dto: T) {
+class DtoFieldMap<T : DocumentDto>(val dto: T) {
     private val fieldMap = HashMap<String, KProperty1<T, *>>()
 
     companion object {
@@ -23,7 +23,7 @@ class DtoFieldMap<T : DocumentDto>(dto: T) {
         dtoClass.memberProperties.forEach { fieldMap[it.name] = it }
     }
 
-    fun getFieldValue(dto: T, fieldName: String): String {
+    fun getFieldValue(fieldName: String): String {
         return when (val field = fieldMap[fieldName]?.get(dto)) {
             is List<*> -> field.joinToString(", ")
             null, "" -> EMPTY_FIELD_VALUE

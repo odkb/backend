@@ -7,5 +7,5 @@ sealed class DocumentDto {
     @Transient
     val dtoFieldMap by lazy(LazyThreadSafetyMode.NONE) { DtoFieldMap(this) }
 
-    fun getFieldValue(fieldName: String): String = dtoFieldMap.getFieldValue(this, fieldName)
+    fun getFieldValue(fieldName: String): String = dtoFieldMap.getFieldValue(fieldName)
 }
