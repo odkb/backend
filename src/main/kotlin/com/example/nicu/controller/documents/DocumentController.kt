@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
  */
 @RestController
 @RequestMapping("/api/children/{childId}/documents")
-sealed interface DocumentController<T : DocumentDto> {
+internal interface DocumentController<T : DocumentDto> {
 
     /**
      * Returns the [T] from the database.
