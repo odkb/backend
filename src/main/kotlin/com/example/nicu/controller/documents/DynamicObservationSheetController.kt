@@ -17,7 +17,7 @@ class DynamicObservationSheetController(
     private val docxDocumentService: DocxDocumentService,
 ) : DocumentController<DynamicObservationSheetDto> {
     companion object {
-        const val DOCUMENT_TYPE = "primary-examination"
+        const val DOCUMENT_TYPE = "dynamic-observation-sheet"
     }
 
     @GetMapping("/${DOCUMENT_TYPE}")
