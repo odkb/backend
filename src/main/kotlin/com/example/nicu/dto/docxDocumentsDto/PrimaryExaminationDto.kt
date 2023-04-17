@@ -1,6 +1,7 @@
 package com.example.nicu.dto.docxDocumentsDto
 
 import com.example.nicu.utils.LocalDateSerializer
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDate
@@ -10,7 +11,7 @@ import kotlin.math.abs
 data class PrimaryExaminationDto(
     /*Паспортная часть + время и дата*/
     val fullName: String? = null,
-    @Serializable(LocalDateSerializer::class)
+    @Contextual
     val receiptDate: LocalDate? = null,
     val arrivalTime: String? = null,
     val fullNameChild: String? = null,
@@ -19,7 +20,7 @@ data class PrimaryExaminationDto(
     val bornExtra: String? = null,
     var admissionAgeMonth: Int = 0,
     var admissionAgeDay: Int = 0,
-    @Serializable(LocalDateSerializer::class)
+    @Contextual
     val birthday: LocalDate? = null,
     val comesFrom: String? = null,
     @SerialName("EPIDNumber")
@@ -46,7 +47,7 @@ data class PrimaryExaminationDto(
     val motherPhoneNumber: String? = null,
     val fatherPhoneNumber: String? = null,
     val motherWithChild: String? = null,
-    @Serializable(LocalDateSerializer::class)
+    @Contextual
     val motherDateBirth: LocalDate? = null,
     val familyStatus: String? = null,
     val maternalIllnesses: String? = null,
