@@ -48,7 +48,7 @@ class WebSecurityConfig(
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration().apply {
-            allowedOrigins = listOf("http://localhost:5173", "http://95.163.241.71:5173")
+            allowedOrigins = listOf("http://localhost:5173", "http://95.163.241.71:5173", "http://reanim.youlan.ru","HTTP://TEST3.YOULAN.RU","HTTP://REKUHA.RU:8080","HTTP://LOCALHOST:8080","HTTP://87.251.177.37")
             allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
             allowedHeaders = listOf("*")
             allowCredentials = true
