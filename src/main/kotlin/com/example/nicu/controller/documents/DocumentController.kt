@@ -1,6 +1,8 @@
 package com.example.nicu.controller.documents
 
 import com.example.nicu.dto.docxDocumentsDto.DocumentDto
+import mu.KLogger
+import mu.KotlinLogging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/children/{childId}/documents")
 internal interface DocumentController<T : DocumentDto> {
+    val logger: KLogger
+        get() = KotlinLogging.logger {}
 
     /**
      * Returns the [T] from the database.

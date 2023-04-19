@@ -2,15 +2,12 @@ package com.example.nicu.controller.documents
 
 import com.example.nicu.dto.docxDocumentsDto.PrimaryExaminationDto
 import com.example.nicu.service.docxDocuments.DocxDocumentService
-import mu.KotlinLogging
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.io.*
-
-private val logger = KotlinLogging.logger {}
 
 @RestController
 @RequestMapping("/api/children/{childId}/documents")

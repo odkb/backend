@@ -1,6 +1,6 @@
 package com.example.nicu.controller.documents
 
-import com.example.nicu.dto.docxDocumentsDto.DynamicObservationSheetDto
+import com.example.nicu.dto.docxDocumentsDto.SubstantiationDiagnosisDto
 import com.example.nicu.service.docxDocuments.DocxDocumentService
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -10,31 +10,21 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/children/{childId}/documents")
-class DynamicObservationSheetController(
+class SubstantiationDiagnosisController(
     private val docxDocumentService: DocxDocumentService,
-) : DocumentController<DynamicObservationSheetDto> {
+) : DocumentController<SubstantiationDiagnosisDto> {
     companion object {
-        const val DOCUMENT_TYPE = "dynamic-observation-sheet"
+        const val DOCUMENT_TYPE = "substantiation-diagnosis"
     }
 
     @GetMapping("/${DOCUMENT_TYPE}")
-    override fun getDocument(
-        @PathVariable childId: String
-    ): ResponseEntity<DynamicObservationSheetDto> {
+    override fun getDocument(@PathVariable childId: String): ResponseEntity<SubstantiationDiagnosisDto> {
         TODO("Not yet implemented")
     }
 
     @PostMapping("/${DOCUMENT_TYPE}")
-    override fun saveDocument(
-        @RequestBody documentDto: DynamicObservationSheetDto,
-        @PathVariable childId: String
-    ): ResponseEntity<DynamicObservationSheetDto> {
-        TODO("Not yet implemented")
-    }
-
-    @PostMapping("/${DOCUMENT_TYPE}/actions/print")
     override fun printDocument(
-        @RequestBody documentDto: DynamicObservationSheetDto,
+        @RequestBody documentDto: SubstantiationDiagnosisDto,
         @PathVariable childId: String
     ): ResponseEntity<ByteArray> {
         return try {
@@ -51,5 +41,13 @@ class DynamicObservationSheetController(
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("An error occurred while generating the document: ${e.message}".toByteArray())
         }
+    }
+
+    @PostMapping("/${DOCUMENT_TYPE}/actions/print")
+    override fun saveDocument(
+        @RequestBody documentDto: SubstantiationDiagnosisDto,
+        @PathVariable childId: String
+    ): ResponseEntity<SubstantiationDiagnosisDto> {
+        TODO("Not yet implemented")
     }
 }
