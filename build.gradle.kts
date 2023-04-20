@@ -38,6 +38,7 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-core:2.20.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.0.10")
     implementation("org.docx4j:docx4j-JAXB-ReferenceImpl:11.4.9")
+    implementation("org.modelmapper:modelmapper:3.1.0")
 
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")

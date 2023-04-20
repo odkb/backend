@@ -7,667 +7,440 @@ import java.time.LocalDate
 @Entity
 @Table(name = "children")
 class ChildEntity(
+
     @Id
-    @Column(name = "child_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "child_id", nullable = false)
     var id: Long? = null,
 
-    @Column(name = "historyID")
-    var historyID: String? = null,
+    @Column(name = "fullName", nullable = false)
+    var fullName: String? = null,
 
-    @Column(name = "is_superuser")
-    var isSuperuser: String?,
+    @Column(name = "receipt_date", nullable = false)
+    var receiptDate: LocalDate? = null,
 
-    @Column(name = "incomeDateTime")
-    var incomeDateTime: String,
+    @Column(name = "arrivar_time", nullable = false)
+    var arrivalTime: String? = null,
 
-    @Column(name = "viewWhit")
-    var viewWhit: String? = null,
+    @Column(name = "fullname_child", nullable = false)
+    var fullNameChild: String? = null,
 
-    @Column(name = "fullName")
-    var fullName: String,
+    @Column(name = "come_further_treatment_and_examination", nullable = false)
+    var comeFurtherTreatmentAndExamination: String? = null,
 
-    @Column(name = "birthDateTime")
-    var birthDateTime: String,
+    @Column(name = "born", nullable = false)
+    var born: String? = null,
 
-    @Column(name = "gender")
-    var gender: String? = null,
+    @Column(name = "born_extra", nullable = false)
+    var bornExtra: String? = null,
 
-    @Column(name = "weight")
-    var weight: String? = null,
+    @Column(name = "admission_age_month", nullable = false)
+    var admissionAgeMonth: Int = 0,
 
-    @Column(name = "lenght")
-    var lenght: String? = null,
+    @Column(name = "admission_age_day", nullable = false)
+    var admissionAgeDay: Int = 0,
 
-    @Column(name = "headCircle")
-    var headCircle: String? = null,
+    @Column(name = "birthday", nullable = false)
+    var birthday: LocalDate? = null,
 
-    @Column(name = "breastCircle")
-    var breastCircle: String? = null,
+    @Column(name = "comes_from", nullable = false)
+    var comesFrom: String? = null,
 
-    @Column(name = "bloodType")
-    var bloodType: String? = null,
+    @Column(name = "epid_number", nullable = false)
+    var epidNumber: String? = null,
 
-    @Column(name = "obstetricAnamnesis")
-    var obstetricAnamnesis: String? = null,
+    @Column(name = "epid_number_date", nullable = false)
+    var epidNumberDate: LocalDate? = null,
 
-    @Column(name = "motherDiseases")
-    var motherDiseases: String? = null,
+    @Column(name = "epid_number_diagnosis", nullable = false)
+    var epidNumberDiagnosis: String? = null,
 
-    @Column(name = "pregnancyCourse")
-    var pregnancyCourse: String? = null,
+    @Column(name = "respiratory_support", nullable = false)
+    var respiratorySupport: String? = null,
 
-    @Column(name = "vprFoetus")
-    var vprFoetus: String? = null,
+    @Column(name = "respiratory_support_start", nullable = false)
+    var respiratorySupportStart: String? = null,
 
-    @Column(name = "isSteroidPrevention")
-    var isSteroidPrevention: String? = null,
+    @Column(name = "respiratory_support_end", nullable = false)
+    var respiratorySupportEnd: String? = null,
 
-//    @Column(name = "steroidPrevention")
-//    var steroidPrevention: String? = null,
+    @Column(name = "drug_therapy", nullable = false)
+    var drugTherapy: String? = null,
 
-    @Column(name = "steroidPreventionDate")
-    var steroidPreventionDate: String? = null,
+    @Column(name = "venous_access", nullable = false)
+    var venousAccess: String? = null,
 
-    @Column(name = "pregnancy")
-    var pregnancy: String? = null,
+    @Column(name = "venous_access_start", nullable = false)
+    var venousAccessStart: String? = null,
 
-    @Column(name = "childbirth")
-    var childbirth: LocalDate? = null,
+    @Column(name = "venous_access_end", nullable = false)
+    var venousAccessEnd: String? = null,
 
-    @Column(name = "childbirthCourse")
-    var childbirthCourse: String? = null,
+    @Column(name = "venous_access_extra", nullable = false)
+    var venousAccessExtra: String? = null,
 
-    @Column(name = "childbirthCourse2")
-    var childbirthCourse2: String? = null,
+    @Column(name = "phototherapy", nullable = false)
+    var phototherapy: String? = null,
 
-    @Column(name = "gestation")
-    var gestation: String? = null,
+    @Column(name = "phototherapy_start", nullable = false)
+    var phototherapyStart: String? = null,
 
-    @Column(name = "childbirthText")
-    var childbirthText: String? = null,
+    @Column(name = "phototherapy_end", nullable = false)
+    var phototherapyEnd: String? = null,
 
-    @Column(name = "childbirthDurationHours")
-    var childbirthDurationHours: String? = null,
+    @Column(name = "hypothermia", nullable = false)
+    var hypothermia: String? = null,
 
-    @Column(name = "childbirthDurationMinutes")
-    var childbirthDurationMinutes: String? = null,
+    @Column(name = "hypothermia_start", nullable = false)
+    var hypothermiaStart: String? = null,
 
-    @Column(name = "attemptsPeriods")
-    var attemptsPeriods: String? = null,
+    @Column(name = "hypothermia_end", nullable = false)
+    var hypothermiaEnd: String? = null,
 
-    @Column(name = "liquidlessPeriodDays")
-    var liquidlessPeriodDays: String? = null,
+    @Column(name = "status_at_admission", nullable = false)
+    var statusAtAdmission: String? = null,
 
-    @Column(name = "liquidlessPeriodHours")
-    var liquidlessPeriodHours: String? = null,
+    @Column(name = "severity_due", nullable = false)
+    var severityDue: String? = null,
 
-    @Column(name = "liquidlessPeriodMinuts")
-    var liquidlessPeriodMinuts: String? = null,
+    @Column(name = "reaction_inspection", nullable = false)
+    var reactionInspection: String? = null,
 
-    @Column(name = "liquidColor")
-    var liquidColor: String? = null,
+    @Column(name = "additionally_reaction_inspection", nullable = false)
+    var additionallyReactionInspection: String? = null,
 
-    @Column(name = "liquidsTransp")
-    var liquidsTransp: String? = null,
+    @Column(name = "convulsions", nullable = false)
+    var convulsions: String? = null,
 
-    @Column(name = "liquidsSmell")
-    var liquidsSmell: String? = null,
+    @Column(name = "convulsions_type", nullable = false)
+    var convulsionsType: String? = null,
 
-    @Column(name = "apgar1")
-    var apgar1: String? = null,
+    @Column(name = "muscle_tone", nullable = false)
+    var muscleTone: String? = null,
 
-    @Column(name = "apgar2")
-    var apgar2: String? = null,
+    @Column(name = "additionally_muscle_tone", nullable = false)
+    var additionallyMuscleTone: String? = null,
 
-    @Column(name = "apgar3")
-    var apgar3: String? = null,
+    @Column(name = "reflexes_newborn", nullable = false)
+    var reflexesNewborn: String? = null,
 
-    @Column(name = "apgar4")
-    var apgar4: String? = null,
+    @Column(name = "bulbar_disorders", nullable = false)
+    var bulbarDisorders: String? = null,
 
-    @Column(name = "motherbirthDate")
-    var motherbirthDate: String? = null,
+    @Column(name = "skull_shape", nullable = false)
+    var skullShape: String? = null,
 
-    @Column(name = "motherAge")
-    var motherAge: String? = null,
+    @Column(name = "additionally_skull_shape", nullable = false)
+    var additionallySkullShape: String? = null,
 
-    @Column(name = "motherLastName")
-    var motherLastName: String? = null,
+    @Column(name = "cephalhematomas", nullable = false)
+    var cephalhematomas: String? = null,
 
-    @Column(name = "motherFirstName")
-    var motherFirstName: String?,
+    @Column(name = "cephalhematomas_size", nullable = false)
+    var cephalhematomasSize: String? = null,
 
-    @Column(name = "motherSecondName")
-    var motherSecondName: String,
+    @Column(name = "cephalhematomas_location", nullable = false)
+    var cephalhematomasLocation: String? = null,
 
-    @Column(name = "city")
-    var city: String? = null,
+    @Column(name = "skull_sutures", nullable = false)
+    var skullSutures: String? = null,
 
-    @Column(name = "address")
-    var address: String? = null,
+    @Column(name = "additionally_skull_sutures", nullable = false)
+    var additionallySkullSutures: String? = null,
 
-    @Column(name = "phone")
-    var phone: String? = null,
+    @Column(name = "big_fontanel", nullable = false)
+    var bigFontanel: String? = null,
 
-    @Column(name = "phone2")
-    var phone2: String? = null,
+    @Column(name = "big_fontanel_size", nullable = false)
+    var bigFontanelSize: String? = null,
 
-    @Column(name = "motherHIV")
-    var motherHIV: String? = null,
+    @Column(name = "meningeal_symptoms", nullable = false)
+    var meningealSymptoms: String? = null,
 
-    @Column(name = "motherHIVterapy")
-    var motherHIVterapy: String? = null,
+    @Column(name = "additionally_meningeal_symptoms", nullable = false)
+    var additionallyMeningealSymptoms: String? = null,
 
-    @Column(name = "motherHIVisPositive")
-    var motherHIVisPositive: String? = null,
+    @Column(name = "status_at_admission_other", nullable = false)
+    var statusAtAdmissionOther: String? = null,
 
-    @Column(name = "fatherHIV")
-    var fatherHIV: String? = null,
+    @Column(name = "skeleton_bones", nullable = false)
+    var skeletonBones: String? = null,
 
-    @Column(name = "ferstSteps")
-    var ferstSteps: String? = null,
+    @Column(name = "skull_bones", nullable = false)
+    var skullBones: String? = null,
 
-    @Column(name = "heating")
-    var heating: String? = null,
+    @Column(name = "clavicle", nullable = false)
+    var clavicle: String? = null,
 
-    @Column(name = "sanVDP")
-    var sanVDP: String? = null,
+    @Column(name = "clavicle_corn", nullable = false)
+    var clavicleCorn: String? = null,
 
-    @Column(name = "obtiranie")
-    var obtiranie: String? = null,
+    @Column(name = "clavicle_corn_location", nullable = false)
+    var clavicleCornLocation: String? = null,
 
-    @Column(name = "termoFilm")
-    var termoFilm: String? = null,
+    @Column(name = "clavicle_corn_size", nullable = false)
+    var clavicleCornSize: String? = null,
 
-    @Column(name = "o2Therapy")
-    var o2Therapy: String? = null,
+    @Column(name = "joints", nullable = false)
+    var joints: String? = null,
 
-    @Column(name = "o2TherapyComent")
-    var o2TherapyComent: String? = null,
+    @Column(name = "additionally_joints", nullable = false)
+    var additionallyJoints: String? = "",
 
-    @Column(name = "cPAP")
-    var cPAP: String? = null,
-
-    @Column(name = "cPAPType")
-    var cPAPType: String? = null,
-
-    @Column(name = "cPAPTherapyComent")
-    var cPAPTherapyComent: String? = null,
-
-    @Column(name = "ivl")
-    var ivl: String? = null,
-
-    @Column(name = "ivlType")
-    var ivlType: String? = null,
-
-    @Column(name = "ivlTherapyComent")
-    var ivlTherapyComent: String? = null,
-
-    @Column(name = "it")
-    var it: String? = null,
-
-    @Column(name = "itSanation")
-    var itSanation: String? = null,
-
-    @Column(name = "itContIVL")
-    var itContIVL: String? = null,
-
-    @Column(name = "itExtubation")
-    var itExtubation: String? = null,
-
-    @Column(name = "itTherapyEtt")
-    var itTherapyEtt: String? = null,
-
-    @Column(name = "itTherapyDeep")
-    var itTherapyDeep: String? = null,
-
-    @Column(name = "itTherapyComent")
-    var itTherapyComent: String? = null,
-
-    @Column(name = "subfractant")
-    var subfractant: String? = null,
-
-    @Column(name = "subfractantVol")
-    var subfractantVol: String? = null,
-
-    @Column(name = "subfractantMethod")
-    var subfractantMethod: String? = null,
-
-    @Column(name = "subfractantComent")
-    var subfractantComent: String? = null,
-
-    @Column(name = "cpr")
-    var cpr: String? = null,
-
-    @Column(name = "cprComent")
-    var cprComent: String? = null,
-
-    @Column(name = "drugs")
-    var drugs: String? = null,
-
-    @Column(name = "drugsAdr")
-    var drugsAdr: String? = null,
-
-    @Column(name = "drugsMethod")
-    var drugsMethod: String? = null,
-
-    @Column(name = "drugsLiq")
-    var drugsLiq: String? = null,
-
-    @Column(name = "birthState")
-    var birthState: String? = null,
-
-    @Column(name = "transportPreporation")
-    var transportPreporation: String? = null,
-
-    @Column(name = "diseaseCourse")
-    var diseaseCourse: String?,
-
-    @Column(name = "transportation")
-    var transportation: String,
-
-    @Column(name = "transportationMethod")
-    var transportationMethod: String? = null,
-
-    @Column(name = "transportationCase")
-    var transportationCase: String? = null,
-
-    @Column(name = "pip")
-    var pip: String? = null,
-
-    @Column(name = "peep")
-    var peep: String? = null,
-
-    @Column(name = "fio2")
-    var fio2: String? = null,
-
-    @Column(name = "ti")
-    var ti: String? = null,
-
-    @Column(name = "r")
-    var r: String? = null,
-
-    @Column(name = "flow")
-    var flow: String? = null,
-
-    @Column(name = "vt")
-    var vt: String? = null,
-
-    @Column(name = "spo2")
-    var spo2: String? = null,
-
-    @Column(name = "heartBeat")
-    var heartBeat: String? = null,
-
-    @Column(name = "bloodPreasureSis")
-    var bloodPreasureSis: String? = null,
-
-    @Column(name = "bloodPreasurDia")
-    var bloodPreasurDia: String? = null,
-
-    @Column(name = "bloodPreasurAvg")
-    var bloodPreasurAvg: String? = null,
-
-    @Column(name = "incomeWeight")
-    var incomeWeight: String? = null,
-
-    @Column(name = "incomTemper")
-    var incomTemper: String? = null,
-
-    @Column(name = "commonState")
-    var commonState: String? = null,
-
-    @Column(name = "commonStateOther")
-    var commonStateOther: String? = null,
-
-    @Column(name = "consciousness")
-    var consciousness: String? = null,
-
-    @Column(name = "sedation")
-    var sedation: String? = null,
-
-    @Column(name = "viewReactions")
-    var viewReactions: String? = null,
-
-    @Column(name = "pupil")
-    var pupil: String? = null,
-
-    @Column(name = "msrf")
-    var msrf: String? = null,
-
-    @Column(name = "br1")
-    var br1: String? = null,
-
-    @Column(name = "br2")
-    var br2: String? = null,
-
-    @Column(name = "br")
-    var br: String? = null,
-
-    @Column(name = "spasms")
-    var spasms: String? = null,
-
-    @Column(name = "photoreaction")
-    var photoreaction: String? = null,
-
-    @Column(name = "skinColor")
+    @Column(name = "skin_color", nullable = false)
     var skinColor: String? = null,
 
-    @Column(name = "skinTurgor")
-    var skinTurgor: String? = null,
+    @Column(name = "skin_color_type", nullable = false)
+    var skinColorType: String? = null,
 
-    @Column(name = "skinHipostas")
-    var skinHipostas: String? = null,
+    @Column(name = "damage", nullable = false)
+    var damage: String? = null,
 
-    @Column(name = "skinNavel")
-    var skinNavel: String? = null,
+    @Column(name = "additionally_damage", nullable = false)
+    var additionallyDamage: String? = null,
 
-    @Column(name = "skinOther")
-    var skinOther: String? = null,
+    @Column(name = "rashes", nullable = false)
+    var rashes: String? = null,
 
-    @Column(name = "breath")
-    var breath: String? = null,
+    @Column(name = "rashes_location", nullable = false)
+    var rashesLocation: String? = null,
 
-    @Column(name = "breathFreq")
-    var breathFreq: String? = null,
+    @Column(name = "rashes_progres", nullable = false)
+    var rashesProgres: String? = null,
 
-    @Column(name = "breathBiomech")
-    var breathBiomech: String? = null,
+    @Column(name = "pathological_formations", nullable = false)
+    var pathologicalFormations: String? = null,
 
-    @Column(name = "breathO2")
-    var breathO2: String? = null,
+    @Column(name = "pathological_formations_location", nullable = false)
+    var pathologicalFormationsLocation: String? = null,
 
-    @Column(name = "breathMakrota")
-    var breathMakrota: String? = null,
+    @Column(name = "pathological_formations_type", nullable = false)
+    var pathologicalFormationsType: String? = null,
 
-    @Column(name = "breathMakrotaVol")
-    var breathMakrotaVol: String? = null,
+    @Column(name = "additionally_pathological_formations", nullable = false)
+    var additionallyPathologicalFormations: String? = null,
 
-    @Column(name = "breathMakrotaCont")
-    var breathMakrotaCont: String? = null,
+    @Column(name = "peeling", nullable = false)
+    var peeling: String? = null,
 
-    @Column(name = "breathResperator")
-    var breathResperator: String? = null,
+    @Column(name = "peeling_location", nullable = false)
+    var peelingLocation: String? = null,
 
-    @Column(name = "breathETT1")
-    var breathETT1: String? = null,
+    @Column(name = "peeling_description", nullable = false)
+    var peelingDescription: String? = null,
 
-    @Column(name = "breathETT2")
-    var breathETT2: String? = null,
+    @Column(name = "edema", nullable = false)
+    var edema: String? = null,
 
-    @Column(name = "breathAscultivno")
-    var breathAscultivno: String? = null,
+    @Column(name = "additionally_edema", nullable = false)
+    var additionallyEdema: String? = null,
 
-    @Column(name = "breathKOS")
-    var breathKOS: String? = null,
+    @Column(name = "edema_type", nullable = false)
+    var edemaType: String? = null,
 
-    @Column(name = "breathPH")
-    var breathPH: String? = null,
+    @Column(name = "elasticity", nullable = false)
+    var elasticity: String? = null,
 
-    @Column(name = "breathPCO2")
-    var breathPCO2: String?,
+    @Column(name = "turgor", nullable = false)
+    var turgor: String? = null,
 
-    @Column(name = "breathPO2")
-    var breathPO2: String,
+    @Column(name = "cord_remnant", nullable = false)
+    var cordRemnant: String? = null,
 
-    @Column(name = "breathABE")
-    var breathABE: String? = null,
+    @Column(name = "umbilical_wound", nullable = false)
+    var umbilicalWound: String? = null,
 
-    @Column(name = "auscultivno")
-    var auscultivno: String? = null,
+    @Column(name = "mucous", nullable = false)
+    var mucous: String? = null,
 
-    @Column(name = "hSystemHemodinaica")
-    var hSystemHemodinaica: String? = null,
+    @Column(name = "mucous_humidity", nullable = false)
+    var mucousHumidity: String? = null,
 
-    @Column(name = "hSystemTones")
-    var hSystemTones: String? = null,
+    @Column(name = "salivation", nullable = false)
+    var salivation: String? = null,
 
-    @Column(name = "hSystemTonesTypes")
-    var hSystemTonesTypes: String? = null,
+    @Column(name = "oxygen_dependence", nullable = false)
+    var oxygenDependence: String? = null,
 
-    @Column(name = "hSystemINVAPGE")
-    var hSystemINVAPGE: String? = null,
+    @Column(name = "chest_shape", nullable = false)
+    var chestShape: String? = null,
 
-    @Column(name = "hSystemNoise")
-    var hSystemNoise: String? = null,
+    @Column(name = "chest_shape_extra", nullable = false)
+    var chestShapeExtra: String? = null,
 
-    @Column(name = "hSystemPulse")
-    var hSystemPulse: String? = null,
+    @Column(name = "breathing_through_nose", nullable = false)
+    var breathingThroughNose: String? = null,
 
-    @Column(name = "hSystemSpot")
-    var hSystemSpot: String? = null,
+    @Column(name = "biomechanics_respiration", nullable = false)
+    var biomechanicsRespiration: String? = null,
 
-    @Column(name = "hSystemBeat")
-    var hSystemBeat: String? = null,
+    @Column(name = "auscultatory_picture", nullable = false)
+    var auscultatoryPicture: String? = null,
 
-    @Column(name = "hSystembloodPreasureSis")
-    var hSystembloodPreasureSis: String? = null,
+    @Column(name = "auscultatory_picture_extra_text", nullable = false)
+    var auscultatoryPictureExtraText: String? = null,
 
-    @Column(name = "hSystembloodPreasurDia")
-    var hSystembloodPreasurDia: String? = null,
+    @Column(name = "wheezing", nullable = false)
+    var wheezing: String? = null,
 
-    @Column(name = "hSystembloodPreasurAvg")
-    var hSystembloodPreasurAvg: String? = null,
+    @Column(name = "crepitus", nullable = false)
+    var crepitus: String? = null,
 
-    @Column(name = "hSystemSatO2")
-    var hSystemSatO2: String? = null,
+    @Column(name = "respiration_rate", nullable = false)
+    var respirationRate: String? = null,
 
-    @Column(name = "stomath")
-    var stomath: String? = null,
+    @Column(name = "hemodynamics", nullable = false)
+    var hemodynamics: String? = null,
 
-    @Column(name = "liver")
+    @Column(name = "heart_sounds", nullable = false)
+    var heartSounds: String? = null,
+
+    @Column(name = "heart_rate", nullable = false)
+    var heartRate: String? = null,
+
+    @Column(name = "noise", nullable = false)
+    var noise: String? = null,
+
+    @Column(name = "noise_extra", nullable = false)
+    var noiseExtra: String? = null,
+
+    @Column(name = "pulse_determined", nullable = false)
+    var pulseDetermined: String? = null,
+
+    @Column(name = "pale_spot_symptom", nullable = false)
+    var paleSpotSymptom: String? = null,
+
+    @Column(name = "child_blood_type", nullable = false)
+    var childBloodType: String = """Цоликлонами анти А                   анти В                       резус\n" +
+            "Определена группа крови и резус принадлежность (и выбор вариантов группы крови, как при заполнении формы)\n" +
+            "Кровь отправлена в отделение трансфузиологии для подтверждения.\n" +
+            "                                                      Подпись врача                             ФИО""",
+
+    @Column(name = "stomach", nullable = false)
+    var stomach: String? = null,
+
+    @Column(name = "peristalsis", nullable = false)
+    var peristalsis: String? = null,
+
+    @Column(name = "liver", nullable = false)
     var liver: String? = null,
 
-    @Column(name = "spleen")
+    @Column(name = "liver_ribs", nullable = false)
+    var liverRibs: String? = null,
+
+    @Column(name = "liver_size", nullable = false)
+    var liverSize: String? = null,
+
+    @Column(name = "spleen", nullable = false)
     var spleen: String? = null,
 
-    @Column(name = "defication")
-    var defication: String? = null,
+    @Column(name = "spleen_size", nullable = false)
+    var spleenSize: String? = null,
 
-    @Column(name = "food")
-    var food: String? = null,
+    @Column(name = "bowel_ovement", nullable = false)
+    var bowelMovement: String? = null,
 
-    @Column(name = "stomathContain")
-    var stomathContain: String? = null,
+    @Column(name = "bowel_movement_count", nullable = false)
+    var bowelMovementCount: String? = null,
 
-    @Column(name = "stul")
-    var stul: String? = null,
+    @Column(name = "bowel_movement_type", nullable = false)
+    var bowelMovementType: String? = null,
 
-    @Column(name = "diurez")
-    var diurez: String? = null,
+    @Column(name = "feeding", nullable = false)
+    var feeding: String? = null,
 
-    @Column(name = "gentals")
-    var gentals: String? = null,
+    @Column(name = "feed_name", nullable = false)
+    var feedName: String? = null,
 
-    @Column(name = "vol")
-    var vol: String? = null,
+    @Column(name = "feeding_count", nullable = false)
+    var feedingCount: String? = null,
 
-    @Column(name = "weg")
-    var weg: String? = null,
+    @Column(name = "feeding_time", nullable = false)
+    var feedingTime: String? = null,
 
-    @Column(name = "spe")
-    var spe: String? = null,
+    @Column(name = "feeding_type", nullable = false)
+    var feedingType: String? = null,
 
-    @Column(name = "urinogenitalComent")
-    var urinogenitalComent: String? = null,
+    @Column(name = "feeding_type_time", nullable = false)
+    var feedingTypeTime: String? = null,
 
-    @Column(name = "glico")
-    var glico: String? = null,
+    @Column(name = "regurgitation", nullable = false)
+    var regurgitation: String? = null,
 
-    @Column(name = "K")
-    var K: String? = null,
+    @Column(name = "kidneys", nullable = false)
+    var kidneys: String? = null,
 
-    @Column(name = "Na")
-    var Na: String? = null,
+    @Column(name = "diuresis", nullable = false)
+    var diuresis: String? = null,
 
-    @Column(name = "Hb")
-    var Hb: String? = null,
+    @Column(name = "diuresis_extra", nullable = false)
+    var diuresisExtra: String? = null,
 
-    @Column(name = "Lact")
-    var Lact: String? = null,
+    @Column(name = "stimulation_diuresis", nullable = false)
+    var stimulationDiuresis: String? = null,
 
-    @Column(name = "TSBi")
-    var TSBi: String? = null,
+    @Column(name = "structure_external_genitalia", nullable = false)
+    var structureExternalGenitalia: String? = null,
 
-    @Column(name = "Hct")
-    var Hct: String? = null,
+    @Column(name = "structure_external_genitalia_gender", nullable = false)
+    var structureExternalGenitaliaGender: String? = null,
 
-    @Column(name = "sindromDiag")
-    var sindromDiag: String? = null,
+    @Column(name = "structure_external_genitalia_extra", nullable = false)
+    var structureExternalGenitaliaExtra: String? = null,
 
-    @Column(name = "preDiag")
-    var preDiag: String? = null,
+    @Column(name = "external_genitals_features", nullable = false)
+    var externalGenitalsFeatures: String? = null,
 
-    @Column(name = "respSupport")
-    var respSupport: String? = null,
+    @Column(name = "disease_history", nullable = false)
+    var diseaseHistory: String? = null,
 
-    @Column(name = "insfusion")
-    var insfusion: String? = null,
+    @Column(name = "disease_dynamics", nullable = false)
+    var diseaseDynamics: String? = null,
 
-    @Column(name = "blood")
-    var blood: String? = null,
+    @Column(name = "main_syndromes_admission", nullable = false)
+    var mainSyndromesAdmission: String? = null,
 
-    @Column(name = "invazpge")
-    var invazpge: String? = null,
+    @Column(name = "combine_diagnosis", nullable = false)
+    var combineDiagnosis: String? = null,
 
-    @Column(name = "drugsTreatment")
-    var drugsTreatment: String? = null,
+    @Column(name = "diagnosis_admission_main", nullable = false)
+    var diagnosisAdmissionMain: String? = null,
 
-    @Column(name = "foodTreatment")
-    var foodTreatment: String? = null,
+    @Column(name = "diagnosis_admission_main_extra", nullable = false)
+    var diagnosisAdmissionMainExtra: String? = null,
 
-    @Column(name = "antibacter")
-    var antibacter: String? = null,
+    @Column(name = "diagnosis_admission_main_complication", nullable = false)
+    var diagnosisAdmissionMainComplication: String? = null,
 
-    @Column(name = "treatmentComent")
-    var treatmentComent: String? = null,
+    @Column(name = "diagnosis_admission_background", nullable = false)
+    var diagnosisAdmissionBackground: String? = null,
 
-    @Column(name = "oak")
-    var oak: String? = null,
+    @Column(name = "diagnosis_admission_related", nullable = false)
+    var diagnosisAdmissionRelated: String? = null,
 
-    @Column(name = "oam")
-    var oam: String? = null,
+    @Column(name = "diagnosis_admission_general", nullable = false)
+    var diagnosisAdmissionGeneral: String? = null,
 
-    @Column(name = "bclBlood")
-    var bclBlood: String? = null,
+    @Column(name = "survey_plan", nullable = false)
+    var surveyPlan: String? = null,
 
-    @Column(name = "rentgen")
-    var rentgen: String? = null,
+    @Column(name = "survey_plan_extra", nullable = false)
+    var surveyPlanExtra: String? = null,
 
-    @Column(name = "neirodream")
-    var neirodream: String? = null,
+    @Column(name = "care_plan", nullable = false)
+    var carePlan: String? = null,
 
-    @Column(name = "uziOrgans")
-    var uziOrgans: String? = null,
+    @Column(name = "treatment_plan", nullable = false)
+    var treatmentPlan: String? = null,
 
-    @Column(name = "uziHeart")
-    var uziHeart: String? = null,
+    @Column(name = "parenteral_nutrition", nullable = false)
+    var parenteralNutrition: String? = null,
 
-    @Column(name = "bacterView")
-    var bacterView: String? = null,
+    @Column(name = "nutrition_calculation", nullable = false)
+    var nutritionCalculation: String? = null,
 
-    @Column(name = "gazBlood")
-    var gazBlood: String? = null,
-
-    @Column(name = "gazBloodFreq")
-    var gazBloodFreq: String? = null,
-
-    @Column(name = "otherAnalyses")
-    var otherAnalyses: String? = null,
-
-    @Column(name = "otherAnalysesComent")
-    var otherAnalysesComent: String? = null,
-
-    @Column(name = "otherConsult")
-    var otherConsult: String? = null,
-
-    @Column(name = "otherConsultComent")
-    var otherConsultComent: String? = null,
-
-    @Column(name = "navelCatetr")
-    var navelCatetr: String? = null,
-
-    @Column(name = "navelCatetrComent")
-    var navelCatetrComent: String? = null,
-
-    @Column(name = "gvl")
-    var gvl: String? = null,
-
-    @Column(name = "gvlComent")
-    var gvlComent: String? = null,
-
-    @Column(name = "clavicleCatetr")
-    var clavicleCatetr: String? = null,
-
-    @Column(name = "clavicleCatetrComent")
-    var clavicleCatetrComent: String? = null,
-
-    @Column(name = "venflon")
-    var venflon: String? = null,
-
-    @Column(name = "venflonComent")
-    var venflonComent: String? = null,
-
-    @Column(name = "venesection")
-    var venesection: String? = null,
-
-    @Column(name = "venesectionComent")
-    var venesectionComent: String? = null,
-
-    @Column(name = "instalationDateTime")
-    var instalationDateTime: String? = null,
-
-    @Column(name = "instalationNumbr")
-    var instalationNumbr: String? = null,
-
-    @Column(name = "instalationDeep")
-    var instalationDeep: String? = null,
-
-    @Column(name = "veinAccessComent")
-    var veinAccessComent: String? = null,
-
-    @Column(name = "isFunctNormal")
-    var isFunctNormal: String? = null,
-
-    @Column(name = "bloodType2")
-    var bloodType2: String? = null,
-
-    @Column(name = "cyclon1")
-    var cyclon1: String? = null,
-
-    @Column(name = "cyclon2")
-    var cyclon2: String? = null,
-
-    @Column(name = "cyclon3")
-    var cyclon3: String? = null,
-
-    @Column(name = "leaving")
-    var leaving: String? = null,
-
-    @Column(name = "respLeavingSupport")
-    var respLeavingSupport: String? = null,
-
-    @Column(name = "resuscitationPlace")
-    var resuscitationPlace: String? = null,
-
-    @Column(name = "respirator")
-    var respirator: String? = null,
-
-    @Column(name = "created_at")
-    var created_at: String? = null,
-
-    @Column(name = "updated_at")
-    var updated_at: String? = null,
-
-    ) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as ChildEntity
-
-        return id != null && id == other.id
-    }
-
-    override fun hashCode(): Int = javaClass.hashCode()
+    @Column(name = "text_conclusion", nullable = false)
+    var textConclusion: String? = null,
+) {
 }
+
