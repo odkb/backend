@@ -155,8 +155,7 @@ class ChildEntityService(
 
         childEntity.stomach = dto.stomach?.joinToString()
         childEntity.peristalsis = dto.peristalsis
-        childEntity.liver = dto.liver?.joinToString()
-        childEntity.liverRibs = dto.liverRibs
+        childEntity.liver = dto.liver
         childEntity.liverSize = dto.liverSize
         childEntity.spleen = dto.spleen
         childEntity.spleenSize = dto.spleenSize

@@ -1,8 +1,8 @@
 package com.example.nicu.entity
 
 import jakarta.persistence.*
-import org.hibernate.Hibernate
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "children")
@@ -41,7 +41,7 @@ class ChildEntity(
     var admissionAgeDay: Int = 0,
 
     @Column(name = "birthday", nullable = false)
-    var birthday: LocalDate? = null,
+    var birthday: LocalDateTime? = null,
 
     @Column(name = "comes_from", nullable = false)
     var comesFrom: String? = null,
@@ -311,7 +311,7 @@ class ChildEntity(
     var paleSpotSymptom: String? = null,
 
     @Column(name = "child_blood_type", nullable = false)
-    var childBloodType: String = """Цоликлонами анти А                   анти В                       резус\n" +
+    var childBloodType: String? = """Цоликлонами анти А                   анти В                       резус\n" +
             "Определена группа крови и резус принадлежность (и выбор вариантов группы крови, как при заполнении формы)\n" +
             "Кровь отправлена в отделение трансфузиологии для подтверждения.\n" +
             "                                                      Подпись врача                             ФИО""",
@@ -324,9 +324,6 @@ class ChildEntity(
 
     @Column(name = "liver", nullable = false)
     var liver: String? = null,
-
-    @Column(name = "liver_ribs", nullable = false)
-    var liverRibs: String? = null,
 
     @Column(name = "liver_size", nullable = false)
     var liverSize: String? = null,
