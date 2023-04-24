@@ -1,6 +1,6 @@
 package com.example.nicu
 
-import com.example.nicu.dto.docxDocumentsDto.DocumentDto
+import com.example.nicu.dto.documents.DocumentDto
 import com.example.nicu.utils.formatToddMMyyyy
 import com.example.nicu.utils.formatToddMMyyyyHHmm
 import java.time.LocalDate

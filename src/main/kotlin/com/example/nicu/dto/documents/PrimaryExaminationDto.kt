@@ -1,17 +1,18 @@
-package com.example.nicu.dto.docxDocumentsDto
+package com.example.nicu.dto.documents
 
 import com.example.nicu.utils.LocalDateSerializer
-import kotlinx.serialization.Contextual
+import com.example.nicu.utils.LocalDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlin.math.abs
 
 @Serializable
 data class PrimaryExaminationDto(
     /*Паспортная часть + время и дата*/
     val fullName: String? = null,
-    @Contextual
+    @Serializable(LocalDateSerializer::class)
     val receiptDate: LocalDate? = null,
     val arrivalTime: String? = null,
     val fullNameChild: String? = null,
@@ -20,8 +21,8 @@ data class PrimaryExaminationDto(
     val bornExtra: String? = null,
     var admissionAgeMonth: Int = 0,
     var admissionAgeDay: Int = 0,
-    @Contextual
-    val birthday: LocalDate? = null,
+    @Serializable(LocalDateTimeSerializer::class)
+    val birthday: LocalDateTime? = null,
     val comesFrom: String? = null,
     @SerialName("EPIDNumber")
     val EPIDNumber: String? = null,
@@ -32,6 +33,8 @@ data class PrimaryExaminationDto(
 
     @SerialName("EPIDNumberDiagnosis")
     val EPIDNumberDiagnosis: String? = null,
+
+    val historyNumber: String? = null,
 
     /*Анамнез матери*/
     val motherFullName: String? = null,
@@ -47,7 +50,7 @@ data class PrimaryExaminationDto(
     val motherPhoneNumber: String? = null,
     val fatherPhoneNumber: String? = null,
     val motherWithChild: String? = null,
-    @Contextual
+    @Serializable(LocalDateSerializer::class)
     val motherDateBirth: LocalDate? = null,
     val familyStatus: String? = null,
     val maternalIllnesses: String? = null,
@@ -70,6 +73,12 @@ data class PrimaryExaminationDto(
     val previousPregnanciesExtra: String? = null,
     val steroidProphylaxis: String? = null,
     val steroidProphylaxisExtra: String? = null,
+
+    val urgentСhildbirth: String? = null,
+    val spontaneousChildbirth: String? = null,
+    val operativeDelivery: String? = null,
+    val miscarriage: String? = null,
+    val abort: String? = null,
 
     /*Течение родов*/
 
@@ -219,7 +228,7 @@ data class PrimaryExaminationDto(
     val noiseExtra: List<String>? = null,
     val pulseDetermined: String? = null,
     val paleSpotSymptom: String? = null,
-    val childBloodType: String = """Цоликлонами анти А                   анти В                       резус\n" +
+    val childBloodType: String? = """Цоликлонами анти А                   анти В                       резус\n" +
             "Определена группа крови и резус принадлежность (и выбор вариантов группы крови, как при заполнении формы)\n" +
             "Кровь отправлена в отделение трансфузиологии для подтверждения.\n" +
             "                                                      Подпись врача                             ФИО""",
@@ -228,8 +237,7 @@ data class PrimaryExaminationDto(
 
     val stomach: List<String>? = null,
     val peristalsis: String? = null,
-    val liver: List<String>? = null,
-    val liverRibs: String? = null,
+    val liver: String? = null,
     val liverSize: String? = null,
     val spleen: String? = null,
     val spleenSize: String? = null,
@@ -263,6 +271,7 @@ data class PrimaryExaminationDto(
     val diseaseHistory: String? = null,
     val diseaseDynamics: String? = null,
     val mainSyndromesAdmission: List<String>? = null,
+    val congenitalMalformations: String? = null,
 
     var combineDiagnosis: String? = null,
     val diagnosisAdmissionMain: List<String>? = null,

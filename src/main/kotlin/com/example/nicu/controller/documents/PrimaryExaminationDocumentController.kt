@@ -1,7 +1,8 @@
 package com.example.nicu.controller.documents
 
-import com.example.nicu.dto.docxDocumentsDto.PrimaryExaminationDto
-import com.example.nicu.service.docxDocuments.DocxDocumentService
+import com.example.nicu.dto.documents.PrimaryExaminationDto
+import com.example.nicu.service.documents.DocumentHandler
+import com.example.nicu.service.documents.DocxDocumentService
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -13,6 +14,7 @@ import java.io.*
 @RequestMapping("/api/children/{childId}/documents")
 class PrimaryExaminationDocumentController(
     private val docxDocumentService: DocxDocumentService,
+    private val documentHandler: DocumentHandler,
 ) : DocumentController<PrimaryExaminationDto> {
     companion object {
         const val DOCUMENT_TYPE = "primary-examination"
@@ -39,7 +41,7 @@ class PrimaryExaminationDocumentController(
         @PathVariable childId: String
     ): ResponseEntity<ByteArray> {
         return try {
-            val doc = docxDocumentService.getDocumentAsWord(DOCUMENT_TYPE, documentDto)
+            val doc = documentHandler.getDocumentAsWord(DOCUMENT_TYPE, documentDto)
             val documentBytes = doc.toByteArray()
             return ResponseEntity
                 .ok()

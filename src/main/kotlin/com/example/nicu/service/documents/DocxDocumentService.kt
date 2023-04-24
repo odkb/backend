@@ -1,7 +1,7 @@
-package com.example.nicu.service.docxDocuments
+package com.example.nicu.service.documents
 
 import com.example.nicu.DtoFieldMap
-import com.example.nicu.dto.docxDocumentsDto.DocumentDto
+import com.example.nicu.dto.documents.DocumentDto
 import jakarta.xml.bind.JAXBElement
 import org.docx4j.Docx4J
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage

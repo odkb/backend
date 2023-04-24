@@ -2,7 +2,6 @@ package com.example.nicu.entity
 
 import jakarta.persistence.*
 import org.hibernate.Hibernate
-
 import java.time.LocalDateTime
 
 
@@ -18,6 +17,7 @@ class PregnancyCourseEntity(
     @Column(name = "pregnancy", nullable = true)
     var pregnancy: String? = null,
 
+    @Column(name = "child_birth", nullable = true)
     var childBirth: LocalDateTime? = null,
 
     @Column(name = "previous_pregnancies", nullable = true)

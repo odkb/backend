@@ -1,6 +1,6 @@
 package com.example.nicu.controller
 
-import com.example.nicu.dto.docxDocumentsDto.PrimaryExaminationDto
+import com.example.nicu.dto.documents.PrimaryExaminationDto
 import com.example.nicu.service.db.ChildEntityService
 import com.example.nicu.service.db.CourseLaborEntityService
 import com.example.nicu.service.db.MotherEntityService

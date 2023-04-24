@@ -1,6 +1,6 @@
 package com.example.nicu.service.db
 
-import com.example.nicu.dto.docxDocumentsDto.PrimaryExaminationDto
+import com.example.nicu.dto.documents.PrimaryExaminationDto
 import com.example.nicu.entity.PregnancyCourseEntity
 import com.example.nicu.repository.PregnancyCourseRepository
 import org.springframework.stereotype.Service

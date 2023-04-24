@@ -1,8 +1,6 @@
 package com.example.nicu.service.db
 
-import com.example.nicu.dto.docxDocumentsDto.PrimaryExaminationDto
-import jakarta.persistence.Entity
-import javax.xml.crypto.Data
+import com.example.nicu.dto.documents.PrimaryExaminationDto
 
 sealed interface EntityService<out T> {
     fun save(dto: PrimaryExaminationDto)

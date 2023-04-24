@@ -1,4 +1,4 @@
-package com.example.nicu.dto.docxDocumentsDto
+package com.example.nicu.dto.documents
 
 import com.example.nicu.DtoFieldMap
 import kotlinx.serialization.Transient

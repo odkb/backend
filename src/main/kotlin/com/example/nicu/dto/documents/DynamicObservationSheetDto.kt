@@ -1,4 +1,4 @@
-package com.example.nicu.dto.docxDocumentsDto
+package com.example.nicu.dto.documents
 
 import kotlinx.serialization.Serializable
 

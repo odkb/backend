@@ -1,6 +1,6 @@
 package com.example.nicu.controller.documents
 
-import com.example.nicu.dto.docxDocumentsDto.DocumentDto
+import com.example.nicu.dto.documents.DocumentDto
 import mu.KLogger
 import mu.KotlinLogging
 import org.springframework.http.ResponseEntity

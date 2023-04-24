@@ -1,7 +1,7 @@
 package com.example.nicu.controller.documents
 
-import com.example.nicu.dto.docxDocumentsDto.SubstantiationDiagnosisDto
-import com.example.nicu.service.docxDocuments.DocxDocumentService
+import com.example.nicu.dto.documents.SubstantiationDiagnosisDto
+import com.example.nicu.service.documents.DocxDocumentService
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
