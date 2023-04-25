@@ -19,7 +19,7 @@ class DocumentHandler {
         for (element in xhtmlWithReplacedText.select("*")) {
             if (element.ownText().isNotEmpty()) {
                 for (node in element.textNodes())
-                    node.text(replacePlaceholdersWithValues(node.text(), dto) ?: continue)
+                    node.text(replacePlaceholdersWithValues(node.text(), dto) ?: "")
             }
         }
 
