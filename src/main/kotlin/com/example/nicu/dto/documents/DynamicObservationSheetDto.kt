@@ -14,7 +14,7 @@ data class DynamicObservationSheetDto(
     val diarySkin: String? = null,
     val diarySkinRashes: String? = null,
     val diarySkinExtra: String? = null,
-    val diarySkinExtraType: List<String>?  = null,
+    val diarySkinExtraType: List<String>? = null,
     val diaryBioBreath: String? = null,
     val diaryWheezing: String? = null,
     val diaryWheezingExtra: String? = null,
@@ -74,7 +74,7 @@ data class DynamicObservationSheetDto(
     val diarySkin3: String? = null,
     val diarySkinRashes3: String? = null,
     val diarySkinExtra3: String? = null,
-    val diarySkinExtraType3: List<String>?  = null,
+    val diarySkinExtraType3: List<String>? = null,
     val diaryBioBreath3: String? = null,
     val diaryWheezing3: String? = null,
     val diaryWheezingExtra3: String? = null,
@@ -93,6 +93,4 @@ data class DynamicObservationSheetDto(
     val diaryDefecationExtra3: String? = null,
     val diaryExtraData3: String? = null,
     val diaryAppointed3: String? = null,
-) : DocumentDto() {
-
-}
+) : DocumentDto

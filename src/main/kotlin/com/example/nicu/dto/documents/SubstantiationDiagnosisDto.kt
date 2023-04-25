@@ -5,6 +5,4 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SubstantiationDiagnosisDto(
     val a: String? = ""
-) : DocumentDto() {
-    
-}
+) : DocumentDto

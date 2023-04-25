@@ -9,8 +9,8 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
 
-/*
-Класс для получения значения поля по его имени
+/**
+ * This class is used to map the fields of a [DocumentDto] to their values.
  */
 class DtoFieldMap<T : DocumentDto>(val dto: T) {
     private val fieldMap = HashMap<String, KProperty1<T, *>>()

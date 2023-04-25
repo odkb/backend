@@ -74,7 +74,7 @@ data class PrimaryExaminationDto(
     val steroidProphylaxis: String? = null,
     val steroidProphylaxisExtra: String? = null,
 
-    val urgentСhildbirth: String? = null,
+    val urgentChildbirth: String? = null,
     val spontaneousChildbirth: String? = null,
     val operativeDelivery: String? = null,
     val miscarriage: String? = null,
@@ -290,7 +290,7 @@ data class PrimaryExaminationDto(
     val parenteralNutrition: String? = null,
     val nutritionCalculation: String? = null,
     val textConclusion: String? = null,
-) : DocumentDto() {
+) : DocumentDto {
     init {
         admissionAgeMonth = abs((receiptDate?.month?.value ?: 0) - (birthday?.month?.value ?: 0))
         admissionAgeDay = abs((receiptDate?.dayOfMonth ?: 0) - (birthday?.dayOfMonth ?: 0))

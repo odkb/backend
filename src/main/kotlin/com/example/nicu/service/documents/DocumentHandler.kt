@@ -10,26 +10,18 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
 import java.io.ByteArrayOutputStream
 
-
 @Service
 class DocumentHandler {
     fun getDocumentAsWord(fileName: String, dto: DocumentDto): ByteArrayOutputStream {
         val fileResource = "templates/$fileName.html"
         val htmlTemplate = ClassPathResource(fileResource).inputStream.bufferedReader().use { it.readText() }
-        val xhtmlWithReplacedText = convertHtmlToXhtml(htmlTemplate)
-        for (element in xhtmlWithReplacedText.allElements) {
-            for (child in element.children()) {
-                if (child.hasText()) {
-                    val updatedText = replacePlaceholdersWithValues(element.text(), dto)
-                        ?: continue
-                    child.text(updatedText)
-                }
+        val xhtmlWithReplacedText = parseHtml(htmlTemplate)
+        for (element in xhtmlWithReplacedText.select("*")) {
+            if (element.ownText().isNotEmpty()) {
+                for (node in element.textNodes())
+                    node.text(replacePlaceholdersWithValues(node.text(), dto) ?: continue)
             }
         }
-//        dtoFieldMap.fieldMap.keys.forEach { key ->
-//            val value = dtoFieldMap.getFieldValue(key)
-//            xhtmlWithReplacedText = xhtmlWithReplacedText.replace("\${$key}", value)
-//        }
 
         val wordMLPackage = convertXhtmlToDocx(xhtmlWithReplacedText.html())
         val byteArrayOutputStream = ByteArrayOutputStream()
@@ -44,7 +36,7 @@ class DocumentHandler {
         return wordMLPackage
     }
 
-    private fun convertHtmlToXhtml(html: String): Document {
+    private fun parseHtml(html: String): Document {
         val document: Document = Jsoup.parse(html)
         document.outputSettings().syntax(Document.OutputSettings.Syntax.xml)
         return document
@@ -68,12 +60,13 @@ class DocumentHandler {
 
     private fun getReplacementForPlaceholder(placeholder: String, dto: DocumentDto): String? {
         val (parentFieldName, childPlaceholderName) = parsePlaceholder(placeholder)
-
+        val dtoFieldMap = DtoFieldMap(dto)
         return if (childPlaceholderName == null) {
-            dto.getFieldValue(parentFieldName)
+            dtoFieldMap.getFieldValue(parentFieldName)
         } else {
-            dto.getFieldValue(parentFieldName)
-                .takeIf { it != DtoFieldMap.EMPTY_FIELD_VALUE }?.let { dto.getFieldValue(childPlaceholderName) }
+            dtoFieldMap.getFieldValue(parentFieldName)
+                .takeIf { it != DtoFieldMap.EMPTY_FIELD_VALUE }
+                ?.let { dtoFieldMap.getFieldValue(childPlaceholderName) }
         }
     }
 
