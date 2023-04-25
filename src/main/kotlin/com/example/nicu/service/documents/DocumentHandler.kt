@@ -18,8 +18,9 @@ class DocumentHandler {
         val xhtmlWithReplacedText = parseHtml(htmlTemplate)
         for (element in xhtmlWithReplacedText.select("*")) {
             if (element.ownText().isNotEmpty()) {
-                for (node in element.textNodes())
-                    node.text(replacePlaceholdersWithValues(node.text(), dto) ?: "")
+                for (node in element.textNodes()) {
+                    node.text(dto.getReplaceTextForPlaceholders(node.text()) ?: "")
+                }
             }
         }
 
@@ -42,12 +43,12 @@ class DocumentHandler {
         return document
     }
 
-    private fun replacePlaceholdersWithValues(textValue: String, dto: DocumentDto): String? {
+    private fun DocumentDto.getReplaceTextForPlaceholders(textValue: String): String? {
         val regex = Regex("""\$\{([^}]+)}""")
         var success = true
         val updatedText = regex.replace(textValue) { matchResult ->
             val placeholder = matchResult.groupValues[1]
-            val replacement = getReplacementForPlaceholder(placeholder, dto)
+            val replacement = getReplacementForPlaceholder(placeholder)
             if (replacement == null) {
                 success = false
                 ""
@@ -58,9 +59,9 @@ class DocumentHandler {
         return if (success) updatedText else null
     }
 
-    private fun getReplacementForPlaceholder(placeholder: String, dto: DocumentDto): String? {
+    private fun DocumentDto.getReplacementForPlaceholder(placeholder: String): String? {
         val (parentFieldName, childPlaceholderName) = parsePlaceholder(placeholder)
-        val dtoFieldMap = DtoFieldMap(dto)
+        val dtoFieldMap = DtoFieldMap(this)
         return if (childPlaceholderName == null) {
             dtoFieldMap.getFieldValue(parentFieldName)
         } else {
