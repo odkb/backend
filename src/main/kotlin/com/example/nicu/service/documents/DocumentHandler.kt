@@ -12,22 +12,35 @@ import java.io.ByteArrayOutputStream
 
 @Service
 class DocumentHandler {
+
     fun getDocumentAsWord(fileName: String, dto: DocumentDto): ByteArrayOutputStream {
+        val htmlTemplate = getHtmlTemplate(fileName)
+        val xhtmlWithReplacedText = replacePlaceholdersInHtml(htmlTemplate, dto)
+        val wordMLPackage = convertXhtmlToDocx(xhtmlWithReplacedText.html())
+        return saveDocumentAsByteArray(wordMLPackage)
+    }
+
+    private fun getHtmlTemplate(fileName: String): Document {
         val fileResource = "templates/$fileName.html"
         val htmlTemplate = ClassPathResource(fileResource).inputStream.bufferedReader().use { it.readText() }
-        val xhtmlWithReplacedText = parseHtml(htmlTemplate)
-        for (element in xhtmlWithReplacedText.select("*")) {
+        return parseHtml(htmlTemplate)
+    }
+
+    private fun parseHtml(html: String): Document {
+        val document: Document = Jsoup.parse(html)
+        document.outputSettings().syntax(Document.OutputSettings.Syntax.xml)
+        return document
+    }
+
+    private fun replacePlaceholdersInHtml(htmlTemplate: Document, dto: DocumentDto): Document {
+        for (element in htmlTemplate.select("*")) {
             if (element.ownText().isNotEmpty()) {
                 for (node in element.textNodes()) {
                     node.text(dto.getReplaceTextForPlaceholders(node.text()) ?: "")
                 }
             }
         }
-
-        val wordMLPackage = convertXhtmlToDocx(xhtmlWithReplacedText.html())
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        wordMLPackage.save(byteArrayOutputStream)
-        return byteArrayOutputStream
+        return htmlTemplate
     }
 
     private fun convertXhtmlToDocx(xhtml: String): WordprocessingMLPackage {
@@ -37,10 +50,10 @@ class DocumentHandler {
         return wordMLPackage
     }
 
-    private fun parseHtml(html: String): Document {
-        val document: Document = Jsoup.parse(html)
-        document.outputSettings().syntax(Document.OutputSettings.Syntax.xml)
-        return document
+    private fun saveDocumentAsByteArray(wordMLPackage: WordprocessingMLPackage): ByteArrayOutputStream {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        wordMLPackage.save(byteArrayOutputStream)
+        return byteArrayOutputStream
     }
 
     private fun DocumentDto.getReplaceTextForPlaceholders(textValue: String): String? {
