@@ -397,27 +397,6 @@ class ChildEntity(
     @Column(name = "main_syndromes_admission", nullable = false)
     var mainSyndromesAdmission: String? = null,
 
-    @Column(name = "combine_diagnosis", nullable = false)
-    var combineDiagnosis: String? = null,
-
-    @Column(name = "diagnosis_admission_main", nullable = false)
-    var diagnosisAdmissionMain: String? = null,
-
-    @Column(name = "diagnosis_admission_main_extra", nullable = false)
-    var diagnosisAdmissionMainExtra: String? = null,
-
-    @Column(name = "diagnosis_admission_main_complication", nullable = false)
-    var diagnosisAdmissionMainComplication: String? = null,
-
-    @Column(name = "diagnosis_admission_background", nullable = false)
-    var diagnosisAdmissionBackground: String? = null,
-
-    @Column(name = "diagnosis_admission_related", nullable = false)
-    var diagnosisAdmissionRelated: String? = null,
-
-    @Column(name = "diagnosis_admission_general", nullable = false)
-    var diagnosisAdmissionGeneral: String? = null,
-
     @Column(name = "survey_plan", nullable = false)
     var surveyPlan: String? = null,
 

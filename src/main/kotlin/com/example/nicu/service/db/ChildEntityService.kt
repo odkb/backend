@@ -23,7 +23,7 @@ class ChildEntityService(
     }
 
     fun importChildFromOdkbAPI(): Unit {
-        // TODO: Реализовать создание шкилатрона
+        TODO("Реализовать создание шкилатрона")
     }
 
     override fun save(dto: PrimaryExaminationDto) {
@@ -192,13 +192,6 @@ class ChildEntityService(
         /*Диагноз при поступлении*/
 
         childEntity.mainSyndromesAdmission = dto.mainSyndromesAdmission?.joinToString()
-        childEntity.combineDiagnosis = dto.combineDiagnosis
-        childEntity.diagnosisAdmissionMain = dto.diagnosisAdmissionMain?.joinToString()
-        childEntity.diagnosisAdmissionMainExtra = dto.diagnosisAdmissionMainExtra
-        childEntity.diagnosisAdmissionMainComplication = dto.diagnosisAdmissionMainComplication
-        childEntity.diagnosisAdmissionBackground = dto.diagnosisAdmissionBackground
-        childEntity.diagnosisAdmissionRelated = dto.diagnosisAdmissionRelated
-        childEntity.diagnosisAdmissionGeneral = dto.diagnosisAdmissionGeneral
 
         /*План обследования*/
 
