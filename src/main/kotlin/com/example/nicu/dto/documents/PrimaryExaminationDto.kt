@@ -273,13 +273,26 @@ data class PrimaryExaminationDto(
     val mainSyndromesAdmission: List<String>? = null,
     val congenitalMalformations: String? = null,
 
-    var combineDiagnosis: String? = null,
-    val diagnosisAdmissionMain: List<String>? = null,
-    val diagnosisAdmissionMainExtra: String? = null,
-    val diagnosisAdmissionMainComplication: String? = null,
-    val diagnosisAdmissionBackground: String? = null,
-    val diagnosisAdmissionRelated: String? = null,
-    val diagnosisAdmissionGeneral: String? = null,
+    val anamnez: String? = null,
+    val clinical: String? = null,
+    @SerialName("lab_tech")
+    val labTech: String? = null,
+    @SerialName("main_diag")
+    val mainDiag: String? = null,
+    @SerialName("main_complication")
+    val mainComplication: String? = null,
+    @SerialName("main_comment")
+    val mainComment: String? = null,
+    @SerialName("common_complication")
+    val commonComplication: String? = null,
+    @SerialName("med_tech_manypulations")
+    val medTechManypulations: String? = null,
+    @SerialName("other_disease")
+    val otherDisease: List<OtherDisease>? = null,
+    @SerialName("associated_disease")
+    val associatedDisease: List<AssociatedDisease>? = null,
+    @SerialName("background_disease")
+    val backgroundDisease: List<BackgroundDisease>? = null,
 
     /*План обследования*/
 
@@ -291,11 +304,27 @@ data class PrimaryExaminationDto(
     val nutritionCalculation: String? = null,
     val textConclusion: String? = null,
 ) : DocumentDto {
+
+    @Serializable
+    data class OtherDisease(
+        val type: String? = null,
+        val code: String? = null,
+    )
+
+    @Serializable
+    data class AssociatedDisease(
+        val type: String? = null,
+        val code: String? = null,
+    )
+
+    @Serializable
+    data class BackgroundDisease(
+        val type: String? = null,
+        val code: String? = null,
+    )
+
     init {
         admissionAgeMonth = abs((receiptDate?.month?.value ?: 0) - (birthday?.month?.value ?: 0))
         admissionAgeDay = abs((receiptDate?.dayOfMonth ?: 0) - (birthday?.dayOfMonth ?: 0))
-        if (diagnosisAdmissionMain != null && diagnosisAdmissionMain.size > 1) {
-            combineDiagnosis = "Комбинированное основное заболевание"
-        }
     }
 }
