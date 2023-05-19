@@ -33,6 +33,7 @@ data class DynamicObservationSheetDto(
     val diaryDefecationExtra: String? = null,
     val diaryExtraData: String? = null,
     val diaryAppointed: String? = null,
+    val diaryDoctor: String? = null,
 
     val diaryDateTime2: String? = null,
     val diaryState2: String? = null,
@@ -63,6 +64,7 @@ data class DynamicObservationSheetDto(
     val diaryDefecationExtra2: String? = null,
     val diaryExtraData2: String? = null,
     val diaryAppointed2: String? = null,
+    val diaryDoctor2: String? = null,
 
     val diaryDateTime3: String? = null,
     val diaryState3: String? = null,
@@ -93,4 +95,5 @@ data class DynamicObservationSheetDto(
     val diaryDefecationExtra3: String? = null,
     val diaryExtraData3: String? = null,
     val diaryAppointed3: String? = null,
+    val diaryDoctor3: String? = null,
 ) : DocumentDto

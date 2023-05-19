@@ -4,206 +4,199 @@
     <meta charset="UTF-8">
     <style>
         body {
-            line-height: 1;
+            line-height: 15px;
         }
 
         h1 {
-            font-size: 14pt;
+            font-size: 18px;
             text-align: center;
             font-weight: bold;
         }
 
         h2 {
-            font-size: 12pt;
+            font-size: 16px;
             font-weight: bold;
         }
 
         p {
-            font-size: 10pt;
+            font-size: 14px;
+            text-align: left;
         }
     </style>
     <title></title>
 </head>
 <body>
-<p>Дата поступления ${receiptDate}</p>
-<p>Время поступления ${arrivalTime}</p>
-<br>
-<h1>Первичный осмотр при поступлении в ОПНиНД</h1>
-<br>
-<p>Поступает ${comeFurtherTreatmentAndExamination} для дальнейшего лечения и обследования</p>
-<br>
-<p>Ребенок ${fullNameChild}</p>
-<p>Дата рождения ребенка ${birthday}</p>
-<p>Родился в ${born}</p>
-<p>${born>bornExtra}</p>
-<p>Возраст при поступлении ${admissionAgeMonth} мес, ${admissionAgeDay} дня(ей)</p>
-<p>Поступает из ${comesFrom}</p>
-<p>Транспортировку в отделение перенес удовлетворительно.</p>
-<br>
-<p>ЭПИД номер ${EPIDNumber}/ ${EPIDNumberDate}/ ${EPIDNumberDiagnosis}</p>
-<p>Группа крови ребенка: ${childBloodType}</p>
-<br>
-<h2>Данные анамнеза матери:</h2>
-<p>Мать: ${motherFullName}</p>
-<p>Дата рождения матери: ${motherDateBirth}</p>
-<p>Семейное положение: ${familyStatus}</p>
-<p>Заболевания матери: ${maternalIllnesses}</p>
-<p>Группа крови матери: ${motherBloodGroup} Наличие антиэритроцитарных антител: ${erythrocyteBody}</p>
-<p>Обследование на ВИЧ: мать: ${HIVTestingMother} отец: ${HIVTestingFather}</p>
-<p>Инфекционный анамнез матери: ${maternalInfectiousHistory}</p>
-<br>
-<h2>Течение беременности и родов:</h2>
-<p><strong>Течение беременности:</strong></p>
-<p>Беременность ${pregnancy}</p>
-<p>Роды ${childbirth}</p>
-<p>Предыдущие беременности: ${previousPregnancies}</p>
-<p>${previousPregnancies>previousPregnanciesExtra}</p>
-<p>Данные о сибсах: ${dataSiblings}</p>
-<p>Особенности течения беременности: ${featuresCoursePregnancy}</p>
-<p>Стероидная профилактика: ${steroidProphylaxis}</p>
-<p>${steroidProphylaxis>steroidProphylaxisExtra}</p>
-<p><strong>Течение родов:</strong></p>
-<p>Срок гестации: ${gestationalAge} недель</p>
-<p>Особенности течения родов: ${featuresCourseChildbirth}</p>
-<p>Предлежание: ${presentation} ${headPresentation}</p>
-<p>Способ родоразрешения: ${methodDelivery} ${methodDeliveryType}</p>
-<p>Продолжительность родов ${durationLabor}; потужной период ${strainingPeriod};</p>
-<p>безводный период: ${anhydrousPeriod}</p>
-<p>Воды: ${waters} ${watersVolume}</p>
-<p>Пол ${gender}</p>
-<p>Вес при рождении: ${birthWeight} гр; длина ${length} см; окружность головы ${headCircumference} см;</p>
-<p>окружность груди ${chestCircumference} см</p>
-<p>Оценка по Апгар: ${apgarScore}</p>
-<p><strong>Объем помощи в родовом зале:</strong></p>
-<p>Начальные шаги: ${firstHelp}</p>
-<p>Вид начальной помощи: ${firstHelpType}, ${anotherFirstHelp}</p>
-<p>Вентиляция с положительным давлением: ${ventilation}</p>
-<p>Вид вентиляции: ${ventilation>ventilationType}</p>
-<p>Длительность: ${ventilation>ventilationTime} минут</p>
-<p>Дополнительно: ${ventilation>ventilationInfo}</p>
-<p>Интубация трахеи: ${intubation}</p>
-<p>На ${intubation>intubationTime} минуте</p>
-<p>Непрямой массаж сердца: ${heartMassage}</p>
-<p>С ${heartMassage>heartMassageTime} минуты</p>
-<p>${heartMassage>heartMassageInfo}</p>
-<p>Адреналин: ${adrenalin}</p>
-<p>На ${adrenalin>adrenalinTime} минуте</p>
-<p>${adrenalin>adrenalinCount} введений</p>
-<p>Физраствор: ${saline}</p>
-<p>На ${saline>salineTime} минуте</p>
-<p>${saline>salineCount} мг</p>
-<p>Дополнительно: ${amountAssistanceDeliveryRoom>amountAssistanceDeliveryRoom}</p>
-<br>
-<p><strong>Анамнез заболевания:</strong></p>
-<p>${diseaseHistory}</p>
-<p><strong>Данные обследования, скрининг и прививки:</strong></p>
-<p>Выводятся все таблицы из блока 6 и 7, имеющие внесенные данные</p>
-<p><strong>До ОПН проведено лечение:</strong></p>
-<p>Респираторная терапия: ${respiratorySupport}, дата: ${respiratorySupportStart} - ${respiratorySupportEnd}</p>
-<p>Медикаментозная терапия: ${drugTherapy}</p>
-<p>Вскармливание: ${feeding}</p>
-<p>Венозный доступ: ${venousAccess}, дата: ${venousAccessStart} - ${venousAccessEnd}, дополнительно:
-    ${venousAccessExtra}</p>
-<p>Фототерапия: ${phototherapy}, дата: ${phototherapyStart} - ${phototherapyEnd}</p>
-<p>Гипотермия: ${hypothermia}, дата: ${hypothermiaStart} - ${hypothermiaEnd}</p>
-<br>
-<h2>Объективный статус на момент поступления:</h2>
-<p>Состояние при поступлении ${statusAtAdmission}</p>
-<p>Тяжесть обусловлена ${severityDue}</p>
-<p>Реакция на осмотр ${reactionInspection}, ${additionallyReactionInspection}</p>
-<p>Судороги ${convulsions}, ${convulsionsType}</p>
-<p>Мышечный тонус ${muscleTone}, ${additionallyMuscleTone}</p>
-<p>Рефлексы новорожденного ${reflexesNewborn}</p>
-<p>Бульбарные нарушения ${bulbarDisorders}</p>
-<p>Форма черепа ${skullShape}, ${additionallySkullShape}</p>
-<p>Кефалогематомы ${cephalhematomas}, ${cephalhematomasSize} (см * см), ${cephalhematomasLocation}</p>
-<p>Швы черепа ${skullSutures}, ${additionallySkullSutures}</p>
-<p>Большой родничок ${bigFontanel}, ${bigFontanelSize} (см * см)</p>
-<p>Менингеальные симптомы ${meningealSymptoms}, ${additionallyMeningealSymptoms}</p>
-<p>Другое ${statusAtAdmissionOther}</p>
-<p><strong>Опорно-двигательный аппарат:</strong></p>
-<p>Кости скелета ${skeletonBones}</p>
-<p>Кости черепа ${skullBones}</p>
-<p>Ключицы ${clavicle}</p>
-<p>Костная мозоль ${clavicleCorn}, размер ${clavicleCornSize} (см * см), ${clavicleCornLocation}</p>
-<p>Суставы ${joints}, ${additionallyJoints}</p>
-<p><strong>Кожный покров и слизистые:</strong></p>
-<p>Цвет кожи ${skinColor}, ${skinColorType}</p>
-<p>Повреждения ${damage}, ${additionallyDamage}</p>
-<p>Гематомы ${hematomas}, ${additionallyHematomas}</p>
-<p>Высыпания ${rashes}, ${rashesLocation}, ${rashesProgres}</p>
-<p>Патологические образования ${pathologicalFormations}, ${additionallyPathologicalFormations},
-    ${pathologicalFormationsLocation}, ${pathologicalFormationsType}</p>
-<p>Шелушение ${peeling}, ${peelingLocation}, ${peelingDescription}</p>
-<p>Отеки ${edema}, ${additionallyEdema}, ${edemaType}</p>
-<p>Эластичность ${elasticity}</p>
-<p>Тургор ${turgor}</p>
-<p>Пуповинный остаток ${cordRemnant}</p>
-<p>Пупочная ранка ${umbilicalWound}</p>
-<p>Слизистые ${mucous}, ${mucousHumidity}</p>
-<p><strong>Дыхательная система:</strong></p>
-<p>Кислородозависимость ${oxygenDependence}</p>
-<p>Форма грудной клетки ${chestShape}, ${chestShapeExtra}</p>
-<p>Дыхание через нос ${breathingThroughNose}</p>
-<p>Биомеханика дыхания ${biomechanicsRespiration}</p>
-<p>Аускультативная картина ${auscultatoryPicture}, ${auscultatoryPictureExtra}, ${auscultatoryPictureExtraText}</p>
-<p>Хрипы ${wheezing}</p>
-<p>Крепитация ${crepitus}</p>
-<p>Частота дыханий ${respirationRate} минут</p>
-<p><strong>Сердечно-сосудистая система:</strong></p>
-<p>Гемодинамика ${hemodynamics}</p>
-<p>Тоны сердца ${heartSounds}</p>
-<p>Ритм сердечных сокращений ${heartRate}</p>
-<p>Шум ${noise}, ${noiseExtra}</p>
-<p>Пульс определяется ${pulseDetermined}</p>
-<p>Симптом бледного пятна ${paleSpotSymptom}</p>
-<p><strong>Пищеварительная система:</strong></p>
-<p>Живот ${stomach}</p>
-<p>Перистальтика ${peristalsis}</p>
-<p>Печень ${liver}</p>
-<p>${liverRibs} см</p>
-<p>${liverSize} (см * см)</p>
-<p>Селезенка ${spleen}</p>
-<p>${spleenSize} (см * см)</p>
-<p>Кормление ${feeding}</p>
-<p>${feedingCount} мл</p>
-<p>${feedingTime} раз в сутки</p>
-<p>Смесь ${feedName}</p>
-<p>Способ кормления ${feedingType}</p>
-<p>${feedingTypeTime} часа</p>
-<p>Стул ${bowelMovement}</p>
-<p>${bowelMovementCount} раз в сутки</p>
-<p>${bowelMovementType}</p>
-<p>Срыгивания ${regurgitation}</p>
-<p><strong>Мочевыделительная система:</strong></p>
-<p>Почки ${kidneys}</p>
-<p>Диурез ${diuresis}</p>
-<p>${diuresisExtra}</p>
-<p>Стимуляция диуреза ${stimulationDiuresis}</p>
-<p><strong>Наружные половые органы:</strong></p>
-<p>Строение наружных половых органов ${structureExternalGenitalia}, ${structureExternalGenitaliaGender},
-    ${structureExternalGenitaliaExtra}</p>
-<p>Особенности ${externalGenitalsFeatures}</p>
-<br>
-<p><strong>Основные синдромы при поступлении:</strong></p>
-<p>${mainSyndromesAdmission}</p>
-<br>
-<p>Диагноз при поступлении:</p>
-<p>${combineDiagnosis} ${diagnosisAdmissionMain}</p>
-<p>Дополнительно диагноз при поступлении ${diagnosisAdmissionMainExtra}</p>
-<p>Осложнение основного заболевания ${diagnosisAdmissionMainComplication}</p>
-<p>Фоновое заболевание ${diagnosisAdmissionBackground}</p>
-<p>Сопутствующие заболевание ${diagnosisAdmissionRelated}</p>
-<p>Общее осложнение ${diagnosisAdmissionGeneral}</p>
-<br>
-<p>План обследования ${surveyPlan}</p>
-<p>Дополнительно: ${surveyPlan>surveyPlanExtra}</p>
-<p>План ухода ${carePlan}</p>
-<p>План лечения ${treatmentPlan}</p>
-<p>Парентеральное питание ${parenteralNutrition}</p>
-<p>Расчет питания ${nutritionCalculation}</p>
-<br>
-<p>Подпись врача ${fullName}</p>
+    Дата поступления ${receiptDate}<br>
+    Время поступления ${arrivalTime}<br>
+
+    <h1>Первичный осмотр при поступлении в ОПНиНД</h1><br>
+    <br>
+    Поступает ${comeFurtherTreatmentAndExamination} для дальнейшего лечения и обследования<br>
+
+    Ребенок ${fullNameChild}<br>
+    Дата рождения ребенка ${birthday}<br>
+    Родился в ${born} ${born>bornExtra}<br>
+    Возраст при поступлении ${admissionAgeMonth} мес, ${admissionAgeDay} дня(ей)<br>
+    Поступает из ${comesFrom}<br>
+    Транспортировку в отделение перенес удовлетворительно.<br>
+    <br>
+    ЭПИД номер ${EPIDNumber}/ ${EPIDNumberDate}/ ${EPIDNumberDiagnosis}<br>
+    Группа крови ребенка: ${childBloodType}<br>
+    <br>
+    <h2>Данные анамнеза матери:</h2>
+    Мать: ${motherFullName}<br>
+    Дата рождения матери: ${motherDateBirth}<br>
+    Семейное положение: ${familyStatus}<br>
+    Заболевания матери: ${maternalIllnesses}<br>
+    Группа крови матери: ${motherBloodGroup} Наличие антиэритроцитарных антител: ${erythrocyteBody}<br>
+    Обследование на ВИЧ: мать: ${HIVTestingMother} отец: ${HIVTestingFather}<br>
+    Инфекционный анамнез матери: ${maternalInfectiousHistory}<br>
+    <br>
+    <h2>Течение беременности и родов:</h2>
+    <strong>Течение беременности:</strong><br>
+    Беременность ${pregnancy}<br>
+    Роды ${childbirth}<br>
+    Предыдущие беременности: ${previousPregnancies} ${previousPregnancies>previousPregnanciesExtra}<br>
+    Данные о сибсах: ${dataSiblings}<br>
+    Особенности течения беременности: ${featuresCoursePregnancy}<br>
+    Стероидная профилактика: ${steroidProphylaxis} ${steroidProphylaxis>steroidProphylaxisExtra}<br>
+    <br>
+    <strong>Течение родов:</strong>
+    <br>
+    Срок гестации: ${gestationalAge} недель <br>
+    Особенности течения родов: ${featuresCourseChildbirth}<br>
+    Предлежание: ${presentation} ${headPresentation}<br>
+    Способ родоразрешения: ${methodDelivery} ${methodDeliveryType}<br>
+    Продолжительность родов ${durationLabor}; потужной период ${strainingPeriod};<br>
+    безводный период: ${anhydrousPeriod}<br>
+    Воды: ${waters} ${watersVolume}<br>
+    Пол ${gender}<br>
+    Вес при рождении: ${birthWeight} гр; длина ${length} см; окружность головы ${headCircumference} см;<br>
+    окружность груди ${chestCircumference} см<br>
+    Оценка по Апгар: ${apgarScore}<br>
+    <br>
+    <strong>Объем помощи в родовом зале:</strong><br>
+    Начальные шаги: ${firstHelp} <br>
+    Вид начальной помощи: ${firstHelpType}, ${anotherFirstHelp}<br>
+    Вентиляция с положительным давлением: ${ventilation}; Вид вентиляции: ${ventilation>ventilationType}; Длительность: ${ventilation>ventilationTime} минут;<br>
+    Интубация трахеи: ${intubation}; На ${intubation>intubationTime} минуте;
+    Непрямой массаж сердца: ${heartMassage}; С ${heartMassage>heartMassageTime} минуты ${heartMassage>heartMassageInfo} <br>
+    Адреналин: ${adrenalin};  На ${adrenalin>adrenalinTime} минуте ${adrenalin>adrenalinCount} введений;
+    Физраствор: ${saline}; На ${saline>salineTime} минуте ${saline>salineCount} мг <br>
+    Дополнительно: ${amountAssistanceDeliveryRoom>amountAssistanceDeliveryRoom}<br>
+    <br>
+    <strong>Анамнез заболевания:</strong> <br>
+    ${diseaseHistory}<br> <br>
+    <strong>Данные обследования, скрининг и прививки:</strong><br>
+    Выводятся все таблицы из блока 6 и 7, имеющие внесенные данные<br>
+    <br>
+    <strong>До ОПН проведено лечение:</strong><br>
+    Респираторная терапия: ${respiratorySupport}, дата: ${respiratorySupportStart} - ${respiratorySupportEnd} <br>
+    Медикаментозная терапия: ${drugTherapy} <br>
+    Вскармливание: ${feeding} <br>
+    Венозный доступ: ${venousAccess}, дата: ${venousAccessStart} - ${venousAccessEnd}, дополнительно:
+     ${venousAccessExtra} <br>
+    Фототерапия: ${phototherapy}, дата: ${phototherapyStart} - ${phototherapyEnd} <br>
+    Гипотермия: ${hypothermia}, дата: ${hypothermiaStart} - ${hypothermiaEnd} <br>
+    <br>
+    <h2>Объективный статус на момент поступления:</h2>
+    Состояние при поступлении ${statusAtAdmission} <br>
+    Тяжесть обусловлена ${severityDue} <br>
+    Реакция на осмотр ${reactionInspection}, ${additionallyReactionInspection} <br>
+    Судороги ${convulsions}, ${convulsionsType} <br>
+    Мышечный тонус ${muscleTone}, ${additionallyMuscleTone} <br>
+    Рефлексы новорожденного ${reflexesNewborn} <br>
+    Бульбарные нарушения ${bulbarDisorders} <br>
+    Форма черепа ${skullShape}, ${additionallySkullShape} <br>
+    Кефалогематомы ${cephalhematomas}, ${cephalhematomasSize} (см * см), ${cephalhematomasLocation} <br>
+    Швы черепа ${skullSutures}, ${additionallySkullSutures} <br>
+    Большой родничок ${bigFontanel}, ${bigFontanelSize} (см * см) <br>
+    Менингеальные симптомы ${meningealSymptoms}, ${additionallyMeningealSymptoms} <br>
+    Другое ${statusAtAdmissionOther} <br>
+    <br>
+    <strong>Опорно-двигательный аппарат:</strong>
+    <br>
+    Кости скелета ${skeletonBones} <br>
+    Кости черепа ${skullBones} <br>
+    Ключицы ${clavicle} <br>
+    Костная мозоль ${clavicleCorn}, размер ${clavicleCornSize} (см * см), ${clavicleCornLocation} <br>
+    Суставы ${joints}, ${additionallyJoints} <br>
+    <br>
+    <strong>Кожный покров и слизистые:</strong> <br>
+    Цвет кожи ${skinColor}, ${skinColorType} <br>
+    Повреждения ${damage}, ${additionallyDamage} <br>
+    Гематомы ${hematomas}, ${additionallyHematomas} <br>
+    Высыпания ${rashes}, ${rashesLocation}, ${rashesProgres} <br>
+    Патологические образования ${pathologicalFormations}, ${additionallyPathologicalFormations},
+        ${pathologicalFormationsLocation}, ${pathologicalFormationsType}<br>
+    Шелушение ${peeling}, ${peelingLocation}, ${peelingDescription} <br>
+    Отеки ${edema}, ${additionallyEdema}, ${edemaType} <br>
+    Эластичность ${elasticity} <br>
+    Тургор ${turgor} <br>
+    Пуповинный остаток ${cordRemnant} <br>
+    Пупочная ранка ${umbilicalWound} <br>
+    Слизистые ${mucous}, ${mucousHumidity} <br>
+    <br>
+    <strong>Дыхательная система:</strong> <br>
+    Кислородозависимость ${oxygenDependence} <br>
+    Форма грудной клетки ${chestShape}, ${chestShapeExtra} <br>
+    Дыхание через нос ${breathingThroughNose} <br>
+    Биомеханика дыхания ${biomechanicsRespiration} <br>
+    Аускультативная картина ${auscultatoryPicture}, ${auscultatoryPictureExtra}, ${auscultatoryPictureExtraText} <br>
+    Хрипы ${wheezing} <br>
+    Крепитация ${crepitus} <br>
+    Частота дыханий ${respirationRate} минут <br>
+    <br>
+    <strong>Сердечно-сосудистая система:</strong> <br>
+    Гемодинамика ${hemodynamics} <br>
+    Тоны сердца ${heartSounds} <br>
+    Ритм сердечных сокращений ${heartRate} <br>
+    Шум ${noise}, ${noiseExtra} <br>
+    Пульс определяется ${pulseDetermined} <br>
+    Симптом бледного пятна ${paleSpotSymptom} <br>
+    <br>
+    <strong>Пищеварительная система:</strong> <br>
+    Живот ${stomach} <br>
+    Перистальтика ${peristalsis} <br>
+    Печень ${liver, ${liverRibs} см, ${liverSize} (см * см) <br>
+    Селезенка ${spleen}, ${spleenSize} (см * см) <br>
+    Кормление ${feeding},  ${feedingCount} мл, ${feedingTime} раз в сутки <br>
+    Смесь ${feedName} <br>
+    Способ кормления ${feedingType}, ${feedingTypeTime} часа <br>
+    Стул ${bowelMovement}, ${bowelMovementCount} раз в сутки, ${bowelMovementType} <br>
+    Срыгивания ${regurgitation} <br>
+    <br>
+    <strong>Мочевыделительная система:</strong> <br>
+    Почки ${kidneys} <br>
+    Диурез ${diuresis}, ${diuresisExtra} <br>
+    Стимуляция диуреза ${stimulationDiuresis} <br>
+    <br>
+    <strong>Наружные половые органы:</strong> <br>
+    Строение наружных половых органов ${structureExternalGenitalia}, ${structureExternalGenitaliaGender},
+        ${structureExternalGenitaliaExtra}<br>
+    Особенности ${externalGenitalsFeatures}<br>
+    <br>
+    <strong>Основные синдромы при поступлении:</strong> <br>
+    ${mainSyndromesAdmission} <br>
+    ${anamnez}<br>
+    ${clinical} <br>
+    ${labTech} <br>
+    ${mainDiag} <br>
+    ${mainComplication} <br>
+    ${mainComment} <br>
+    ${commonComplication} <br>
+    ${medTechManypulations} <br>
+    ${otherDisease} <br>
+    ${associatedDisease} <br>
+    ${backgroundDisease} <br>
+
+    План обследования ${surveyPlan}; Дополнительно: ${surveyPlan>surveyPlanExtra} <br>
+    План ухода ${carePlan} <br>
+    План лечения ${treatmentPlan} <br>
+    Парентеральное питание ${parenteralNutrition} <br>
+    Расчет питания ${nutritionCalculation} <br>
+    <br>
+    Подпись врача ${fullName}<br>
 
 </body>
 </html>
