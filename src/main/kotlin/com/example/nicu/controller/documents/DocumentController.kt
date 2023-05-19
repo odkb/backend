@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.*
 abstract class DocumentController<T : DocumentDto>(
     private val documentHandler: DocumentHandler,
 ) {
+    companion object {
+        const val PRINT_ENDPOINT = "/actions/print"
+    }
+
     abstract val documentType: String
 
     val logger: KLogger
@@ -43,7 +47,7 @@ abstract class DocumentController<T : DocumentDto>(
      * The document is generated from the [documentDto].
      * The [childId] is the id of the child.
      */
-    @PostMapping("/document/actions/print")
+    @PostMapping(PRINT_ENDPOINT)
     fun printDocument(@RequestBody documentDto: T, @PathVariable childId: String): ResponseEntity<ByteArray> {
         return try {
             val doc = documentHandler.getDocumentAsWord(documentType, documentDto)

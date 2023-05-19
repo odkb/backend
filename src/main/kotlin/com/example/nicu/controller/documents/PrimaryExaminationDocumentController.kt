@@ -1,5 +1,6 @@
 package com.example.nicu.controller.documents
 
+import com.example.nicu.controller.documents.PrimaryExaminationDocumentController.Companion.DOCUMENT_TYPE
 import com.example.nicu.dto.documents.PrimaryExaminationDto
 import com.example.nicu.service.documents.DocumentHandler
 import org.springframework.http.ResponseEntity
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 import java.io.*
 
 @RestController
-@RequestMapping("/api/children/{childId}/documents")
+@RequestMapping("/api/children/{childId}/documents/${DOCUMENT_TYPE}")
 class PrimaryExaminationDocumentController(
     documentHandler: DocumentHandler,
 ) : DocumentController<PrimaryExaminationDto>(documentHandler) {
@@ -19,14 +20,14 @@ class PrimaryExaminationDocumentController(
         get() = DOCUMENT_TYPE
 
 
-    @GetMapping("/$DOCUMENT_TYPE")
+    @GetMapping
     override fun getDocument(
         @PathVariable childId: String
     ): ResponseEntity<PrimaryExaminationDto> {
         TODO("Not yet implemented")
     }
 
-    @PostMapping("/$DOCUMENT_TYPE")
+    @PostMapping
     override fun saveDocument(
         @RequestBody documentDto: PrimaryExaminationDto,
         @PathVariable childId: String
@@ -34,7 +35,7 @@ class PrimaryExaminationDocumentController(
         TODO("Not yet implemented")
     }
 
-    @PostMapping("/$DOCUMENT_TYPE/actions/print")
+    @PostMapping(PRINT_ENDPOINT)
     override fun printDocument(
         @RequestBody documentDto: PrimaryExaminationDto,
         @PathVariable childId: String
