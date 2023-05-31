@@ -3,6 +3,7 @@ package com.example.nicu.config.security
 import com.example.nicu.config.security.jwt.AuthEntryPointJwt
 import com.example.nicu.config.security.jwt.AuthTokenFilter
 import com.example.nicu.config.security.jwt.JwtUtils
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -26,6 +27,9 @@ class WebSecurityConfig(
     private val employeeDetails: EmployeeDetails,
     private val unauthorizedHandler: AuthEntryPointJwt,
 ) {
+    @Value("\${cors.allowedOrigins}")
+    private lateinit var origins: String
+
     @Bean
     fun authenticationJwtTokenFilter() = AuthTokenFilter(jwtUtils, employeeDetails)
 
@@ -48,7 +52,7 @@ class WebSecurityConfig(
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration().apply {
-            allowedOrigins = listOf("http://localhost:5173")
+            allowedOrigins = origins.split(",")
             allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
             allowedHeaders = listOf("*")
             allowCredentials = true
