@@ -70,7 +70,7 @@ data class PrimaryExaminationDto(
     val previousPregnancies: String? = null,
     val dataSiblings: String? = null,
     val featuresCoursePregnancy: String? = null,
-    val previousPregnanciesExtra: String? = null,
+    val previousPregnanciesExtra: List<String>? = null,
     val steroidProphylaxis: String? = null,
     val steroidProphylaxisExtra: String? = null,
 

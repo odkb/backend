@@ -21,7 +21,7 @@ class PregnancyCourseEntityService(
         pregnancyCourseEntity.previousPregnancies = dto.previousPregnancies
         pregnancyCourseEntity.dataSiblings = dto.dataSiblings
         pregnancyCourseEntity.featuresCoursePregnancy = dto.featuresCoursePregnancy
-        pregnancyCourseEntity.previousPregnanciesExtra = dto.previousPregnanciesExtra
+        pregnancyCourseEntity.previousPregnanciesExtra = dto.previousPregnanciesExtra.toString()
         pregnancyCourseEntity.steroidProphylaxis = dto.steroidProphylaxis
         pregnancyCourseEntity.steroidProphylaxisExtra = dto.steroidProphylaxisExtra
         return pregnancyCourseEntity
